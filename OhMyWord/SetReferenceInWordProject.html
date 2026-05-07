@@ -10,7 +10,7 @@
 <body>
 <p>You are visitor number <img src="/standards-site/OhMyWord/counter.cnt?SetWordReference"
 alt="?????"> since 22 July 2004. 
-<a href="/standards-site/OhMyWord/../standards-site/index.html" onclick="this.href = GetURL('/standards-site/index.html')">Go to Howard Kaikow's home page</a></p>
+<a href="/standards-site/standards-site/OhMyWord/../standards-site/index.html" onclick="this.href = GetURL('/standards-site/index.html')">Go to Howard Kaikow's home page</a></p>
 
 <hr>
 <p>Copyright &copy; 2004 by Howard Kaikow. All rights reserved.
@@ -32,7 +32,7 @@ alt="?????"> since 22 July 2004.
 </ol>
 <p>Note that the reference does get added, one can see this by stepping thru the code, and examining the physical file. However, the reference does not get saved with the template when the code ends, implying that Word is somehow working with a temporary copy of the  template and not correctly updating the saved template.
 <p>I tried an analogous problem using Excel and no such problem exists when adding a reference to an Excel Workbook
-<P><a href="/standards-site/OhMyWord/../WordDownloads/VBASetReferenceInWord97.zip" onclick="this.href = GetURL('/WordDownloads/VBASetReferenceInWord97.zip')">I am providing a Microsoft Word template that can be used to reproduce the problem.</a>. 
+<P><a href="/standards-site/standards-site/OhMyWord/../WordDownloads/VBASetReferenceInWord97.zip" onclick="this.href = GetURL('/WordDownloads/VBASetReferenceInWord97.zip')">I am providing a Microsoft Word template that can be used to reproduce the problem.</a>. 
 I created the template using Word 97. The template can be used in Word 97, Word 2000, Word 2002 and Word 2003.</P>
 <p>You may need to change the values assigned to the  strDLLPath, strReference and strTargetPath variables.
 <p>Sub SetReferenceInWordNotUsingWordObject will produce the expected result, i.e., the reference will be saved.
