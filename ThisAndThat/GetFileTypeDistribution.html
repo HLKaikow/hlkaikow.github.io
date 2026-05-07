@@ -1,0 +1,399 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Windows (vers 22 March 2008), see www.w3.org">
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=us-ascii">
+  <script type="text/javascript" src="../GetURL.js">
+</script>
+  <style type="text/css">
+p.center {text-align: center}
+  p.left {text-align: left}
+  div.center {text-align: center}
+  </style>
+
+  <title>Howard Kaikow's Get File Type Distribution</title>
+</head>
+
+<body>
+  <p>You are visitor number <img alt="?????" src=
+  "../counter.cnt%3FGetFileTypeDistribution">
+  since 26 July 2005</p>
+
+  <p><a href="../indexmain.html" onclick=
+  "this.href = GetURL('http://www.standards.com/indexmain.html')">Go
+  to Howard Kaikow's home page</a></p>
+
+  <p>Copyright &copy; 2005-2000 by Howard Kaikow. All rights
+  reserved.</p>
+
+  <p><strong>Date: 3 July 2009</strong></p>
+
+  <p>Author: <a href=
+  "mailto:kaikow@standards.com?subject=GetFileTypeDistribution">Howard
+  Kaikow</a> &lt;kaikow@standards.com&gt;</p>
+
+  <p>Subject: Get File Type Distribution program</p>
+  <hr>
+
+  <blockquote>
+    <p class="center"><a href=
+    "../Downloads/GetFileTypeDistribution.zip"
+    onclick=
+    "this.href = GetURL('http://www.standards.com/Downloads/GetFileTypeDistribution.zip')">
+    Download GetFileTypeDistribution program</a></p>
+  </blockquote>
+
+  <h1><a name="Overview" id="Overview">Overview</a></h1>
+
+  <p>The Get File Type Distribution program will create a list of
+  the file name extensions ("file types") on each drive and path
+  you identify, giving the following information for each file
+  type:</p>
+
+  <ul>
+    <li>Number of files</li>
+
+    <li>Number of bytes</li>
+
+    <li>Percent of bytes in files in the drive or path</li>
+
+    <li>Percent of bytes on the drive</li>
+  </ul>
+
+  <p>Originally, the program was intended to determine how much
+  disk space was being used by each file type on each drive. I did
+  this because I am/was very displeased with the defaults used for
+  file compression by a particular widely used backup program.
+  Subsequently, I tried other backup programs which allow a virtual
+  drive to be mounted from the backup set. I was curious as to how
+  closely this reflected the actual files on the real drive, so I
+  modified the program to analyze paths, as well as drives.</p>
+
+  <h1>Output</h1>
+
+  <p>The program offers you a choice of outputting to a Microsoft
+  Excel workbook ("workbook"), a text file, or both a workbook and
+  a text file.</p>
+
+  <p>If you choose to output to a text file, each file will be
+  created in the same directory in which you have placed the
+  executable file. The text file uses TAB character delimiters to
+  facilitate your formatting the list as desired.</p>
+
+  <p>If you choose to output to a workbook, a hidden workbook will
+  be used. The workbook will be displayed upon normal termination
+  of the program. <strong>The program displays, but does not save,
+  the workbook. It is up to you to save the workbook.</strong></p>
+
+  <p>Each list of file types is sorted by the percentage of the
+  space used on the drive.</p>
+
+  <h1>Requirements</h1>
+
+  <p>The program was compiled using Microsoft Visual Basic 6 (with
+  SP 6) and the Microsoft Excel 97 library, so the program should
+  work with Excel 97, Excel 2000, Excel 2002, and Excel 2003. It is
+  not necessary to have Microsoft Excel to use the program, unless
+  you wish to output to a workbook.</p>
+
+  <p>In order to run this program, you will need to have the
+  following installed:</p>
+
+  <ul>
+    <li>
+      <p><strong>Windows 2000, or later</strong>.</p>
+    </li>
+
+    <li>
+      <p><strong>Microsoft Excel (Optional):</strong> If you wish
+      to output to a workbook, it will be necessary to have
+      installed Microsoft Excel. Versions prior to Excel 97 will
+      not be supported.</p>
+    </li>
+
+    <li>
+      <p><b>Either Microsoft Visual Basic 6 or the Microsoft Visual
+      Basic 6 run-time files:</b> If you have neither, then you can
+      download the Visual Basic 6 run-time files by following the
+      instructions in <a href=
+      "http://support.microsoft.com/default.aspx?scid=kb;EN-US;192461">
+      VBRun60.exe Installs Visual Basic 6.0 Run-Time Files</a>.</p>
+    </li>
+  </ul>
+
+  <h2>Restrictions</h2>
+
+  <p>I have developed the program using Microsoft Windows 2000, but
+  expect that the program will work in other Microsoft Windows
+  operating systems. I am aware of only the following
+  restrictions:</p>
+
+  <ul>
+    <li>The program uses many Windows API functions. As far as I
+    know, all but one of those API functions are supported in
+    Windows 95 and later. The GetDiskFreeSpaceEx function requires
+    at least Windows 95 OSR2, however, the program will use the
+    GetDiskFreeSpace function if GetDiskFreeSpaceEx is not
+    available.</li>
+
+    <li>The program uses long file names.</li>
+
+    <li>Microsoft Excel imposes a limit on the number of rows in a
+    spreadsheet. If you have requested workbook output, it may be
+    necessary for the program to output more than one spreadsheet
+    for a particular drive or path. This affects the naming of
+    spreadsheets, discussed below.</li>
+  </ul>
+
+  <h2>Spreadsheet naming conventions</h2>
+
+  <p>For each Path, a spreadsheet will be created having a
+  <strong>base</strong> name of "Path" or "Path-n", where "n" is an
+  integer number. For example, if you requested analysis of three
+  paths, the workbook will include spreadsheets with
+  <strong>base</strong> names of Path, Path-1 and Path-2. The
+  actual path is listed in the spreadsheet.</p>
+
+  <blockquote>
+    <p class="left"><strong>Note:</strong> It is not possible to
+    have meaningful spreadsheet names using the actual path because
+    paths will include characters that are not allowed in a
+    spreadsheet name, and the length of a spreadsheet name may not
+    exceed 31 characters.</p>
+  </blockquote>
+
+  <p>For each drive, a spreadsheet will be created having a
+  <strong>base</strong> name of "D" or "D-n", where "D" is the
+  drive letter and "n" is an integer number. For example, if you
+  requested analysis of, say, drive F twice, the workbook will
+  include spreadsheets with <strong>base</strong> names of F and
+  F-1.</p>
+
+  <p>If a spreadsheet requires more rows than permitted in a
+  worksheet, multiple spreadsheets will be used. For example, if it
+  was necessary to use two spreadsheets for drive G, the
+  spreadsheets may be named G(1 of 2) and G(2 of 2), . In
+  general,when multiple spreadsheets are used, the spreadsheet
+  names will be <strong>base</strong>(1 of m) to
+  <strong>base</strong>(m of m), if m spreadsheets were used to
+  list the file types for that <strong>base</strong> drive or
+  path.</p>
+
+  <p>Using the above naming convention, it is possible that a
+  spreadsheet name would exceed the 31 character limit. In this
+  case, the spreadsheet will have whatever unique name was assigned
+  when the spreadsheet was created by Microsoft Excel, e.g.,
+  "Sheet10".</p>
+
+  <h2>File naming conventions</h2>
+
+  <p>A separate text file is saved for each drive and path
+  analyzed. The <strong>base</strong> name for each file is
+  determined the same way as for a spreadsheet. If necessary, "-n"
+  is used to create a unique <strong>base</strong> name. The file
+  name is then constructed by adding ".FileTypes.txt" to the
+  <strong>base</strong> name.</p>
+
+  <p>If the above conventions do not result in a unique file name,
+  the program will attempt to use certain alternative conventions.
+  If the program is still unable to determine a unique file name,
+  then a text file will not be output for the particular drive or
+  path.</p>
+
+  <h1>Running the program</h1>
+
+  <p>There is no installation necessary, just directly run the
+  program by double-clicking on the GetFileTypeDistribution.exe
+  file, or by using a shortcut to that file.</p>
+
+  <p>When you run the program, a Visual Basic 6 Form will be
+  displayed that looks something like the Form below. The Form was
+  designed using a screen resolution of 1280 x 1024. You may resize
+  (with constraints) the Form to make the Form better fit on your
+  screen. You may minimize the Form to get it out of the way (the
+  minimized Form will flash to let you know when the drives and
+  paths have been processed).</p>
+
+  <p>The Form includes the following controls.</p>
+
+  <p class="center"></p>
+
+  <table id="AutoNumber1" style="BORDER-COLLAPSE: collapse"
+  summary="Sort Performance Comparison: Startup" border="1">
+    <tr>
+      <td style="height:24; width:190">
+        <p class="center"><strong>Control</strong></p>
+      </td>
+
+      <td style="height:23">
+        <p class="center"><strong>Purpose</strong></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="height:21; width:190">
+        <p style="TEXT-ALIGN: left"><strong>Select one, or more,
+        drives</strong></p>
+      </td>
+
+      <td style="height:21">Select the drives you wish to have
+      analyzed.</td>
+    </tr>
+
+    <tr>
+      <td style="height:22; width:190"><strong>Paths
+      selected</strong></td>
+
+      <td style="height:22">Lists the paths you have selected for
+      analysis.</td>
+    </tr>
+
+    <tr>
+      <td style="height:21; width:190">
+        <p><strong>Output?</strong></p>
+      </td>
+
+      <td style="height:21">
+        <p>Select one, or both, forms of output.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width:190; height:21">
+        <p><strong>Select All Drives</strong></p>
+      </td>
+
+      <td style="height:21">Select all drives.</td>
+    </tr>
+
+    <tr>
+      <td style="width:190">
+        <p><strong>Unselect All Drives</strong></p>
+      </td>
+
+      <td>
+        <p>Unselect all drives.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width:190">
+        <p><strong>Choose path</strong></p>
+      </td>
+
+      <td>Select the root of a path you wish to be analyzed.</td>
+    </tr>
+
+    <tr>
+      <td style="height:22; width:190"><strong>Remove selected
+      paths</strong></td>
+
+      <td style="height:22">Select one, or more, paths in the
+      <strong>Paths selected</strong> list, then use the
+      <strong>Remove selected paths</strong> button to remove the
+      selected paths from the list.</td>
+    </tr>
+
+    <tr>
+      <td style="height:22; width:190"><strong>Make
+      Lists</strong></td>
+
+      <td style="height:22">After you have selected at least one
+      drive or path, the <b>Make Lists</b> button permits you to
+      run the analysis for the selected drives and paths. The
+      number of milliseconds used will be displayed when processing
+      is completed for each drive and path.</td>
+    </tr>
+
+    <tr>
+      <td style="width:190"><strong>Clear Lists</strong></td>
+
+      <td>The <strong>Clear Lists</strong> button will be displayed
+      after all selected drives and paths have been analyzed.
+      Clicking on the <b>Clear Lists</b> button will unselect all
+      drives and clear the list of paths, enabling you to do
+      further analysis.</td>
+    </tr>
+
+    <tr>
+      <td style="width:190"><strong>Bye Bye!</strong></td>
+
+      <td>Exit the program. If workbook output was selected, a
+      workbook will be displayed.</td>
+    </tr>
+
+    <tr>
+      <td style="width:190"><strong>Include
+      Percentages</strong></td>
+
+      <td>Check to include percentage columns. Uncheck to
+      facilitate comparison with other drives/paths, or an
+      earlier/later version of the same drive/path.</td>
+    </tr>
+
+    <tr>
+      <td style="width:190">
+        <p><strong>About ...</strong></p>
+      </td>
+
+      <td>Check the program version.</td>
+    </tr>
+  </table>
+
+  <div class="center">
+    <script type="text/javascript">
+            document.write('<p><img src="http://www.standards.com/ThisAndThat/'&#32;+&#32;GetURL('http://www.standards.com/ThisAndThat/GetFileTypeDistribution.jpg')&#32;+&#32;'"><\/p>');
+    </script> <noscript>
+    <p><img alt="GetFileTypeDistribution" src=
+    "GetFileTypeDistribution.jpg"></p></noscript>
+  </div>
+
+  <h1>Issues</h1>
+
+  <ul>
+    <li>
+      <strong>Issue with virtual volumes mounted from Ghost
+      10:</strong>
+
+      <p>The program has no device dependencies, and should work
+      with any logical volume. The program has been used with
+      logical volumes on hard drives, flexibile disks, ZIP disks,
+      and optical media (CD-ROM, CD-R, and CD-RW). I do not have
+      DVD drives, but those should work as well.</p>
+
+      <p>In order to mount a volume from a backup program, the
+      backup program has to supply a file system filter driver that
+      interfaces with the native file system. Apparently, there are
+      some differences in the way those drivers are implemented for
+      various products. I have mounted virtual volumes using both
+      Acronis True Image 9 and Symantec Ghost 10.</p>
+
+      <p>All volumes that I have mounted using Acronis True Image 9
+      have worked with the the program.</p>
+
+      <p>However, some volumes mounted from Ghost 10 have not
+      worked, i.e., the program hung up trying to access files for
+      those volumes. Indeed, in this case, you may have to do a
+      hard reboot.</p>
+
+      <p>This makes no sense as the program processes all logical
+      volumes the same way and has no way of distinguishing between
+      actual logical volumes and virtual logical volumes, nor does
+      the program even know, or care, how the volumes were
+      mounted.</p>
+
+      <p><a href=
+      "../Software/GhostIssueFindFiles.html"
+      onclick=
+      "this.href = GetURL('http://www.standards.com/Software/GhostIssueFindFiles.html')">
+      The problem occurs in other programs using very simple
+      code.</a>It is possible that this problem occurs only in
+      Microsoft Windows 2000. I do not currently use Microsoft
+      Windows XP.</p>
+    </li>
+  </ul>
+</body>
+</html>

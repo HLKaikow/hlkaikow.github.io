@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Cannot add reference to Word template project via Automation</title>
+		<script type="text/javascript" src="../GetURL.js"></script>
+<link rev="made" href="mailto:kaikow@standards.com" title=
+"Cannot add reference to Word template project via Automation">
+</head>
+<body>
+<p>You are visitor number <img src="http://www.standards.com./counter.cnt?SetWordReference"
+alt="?????"> since 22 July 2004. 
+<a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+
+<hr>
+<p>Copyright &copy; 2004 by Howard Kaikow. All rights reserved.
+<br>Date: 22 July 2004 
+<br>From: Howard Kaikow &lt;kaikow@standards.com&gt; 
+<br>Subject: Cannot add reference to Word template project via Automation</p>
+<hr>
+<p>It does not seem possible to add a reference to a Word template project using Automation. This seems like a rather serious bug.</p>
+<p>The problem does not exist with Word 97, but exists for Word 2000, Word 2002 and Word 2003.</p>
+<p>Without using Automation, I can delete a reference, then recreate the
+ reference in a Word template, and the resulting reference does get saved with the changed template.</p>
+<p>However, the reference does not get saved if I use Automation with a Word object in any of the following:</p>
+<OL>
+<li>Word itself.</li>
+<li>VB .NET 2003.</li>
+<li>VB 6 SP 6.</li>
+<li>VSTO, using the built-in This Application object in VB .NET.</li>
+<li>Excel 2003 (I've not tried this with other Excel versions).</li>
+</ol>
+<p>Note that the reference does get added, one can see this by stepping thru the code, and examining the physical file. However, the reference does not get saved with the template when the code ends, implying that Word is somehow working with a temporary copy of the  template and not correctly updating the saved template.
+<p>I tried an analogous problem using Excel and no such problem exists when adding a reference to an Excel Workbook
+<P><a href="../WordDownloads/VBASetReferenceInWord97.zip" onclick="this.href = GetURL('http://www.standards.com/WordDownloads/VBASetReferenceInWord97.zip')">I am providing a Microsoft Word template that can be used to reproduce the problem.</a>. 
+I created the template using Word 97. The template can be used in Word 97, Word 2000, Word 2002 and Word 2003.</P>
+<p>You may need to change the values assigned to the  strDLLPath, strReference and strTargetPath variables.
+<p>Sub SetReferenceInWordNotUsingWordObject will produce the expected result, i.e., the reference will be saved.
+<p>Sub SetReferenceInWordUsingWordObject will NOT produce the expected result, i.e., the reference will not be saved.
+</body>
+</html>

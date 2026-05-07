@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>How to look at macro source code</TITLE>
+		<script type="text/javascript" src="../GetURL.js"></script>
+<LINK REV="made" HREF="mailto:kaikow@standards.com" TITLE="How to look at macro source code">
+</HEAD>
+<BODY>
+<p>You are visitor number <img src="../counter.cnt%3FExaminingMacros" alt="?????"> since 14 October 2004.
+<br><a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+<p>Copyright &copy; 1999 by Howard Kaikow. All rights reserved.
+<BR>Date: 10 February 1999
+<BR>From: Howard Kaikow &lt;kaikow@standards.com&gt;
+<BR>Subject: How to look at macro source code</p>
+<HR>
+<P>It is sometimes necessary to examine the source code of a macro without allowing the macro to execute.</P>
+<P>If a macro is not one of the macros that will automatically execute when you start Word or when you open/create a document, then all you need to do is attach the template to a document and examine the macro source code. If the template is a global add-in, e.g., the template is located in Word's Startup directory, then you will have to open that template directly.</P>
+<P>If the macro to be examined is one of the automatic macros, or you are unsure of what macros are in a template, then you may use the following technique to examine the source of a macro:</P>
+<OL>
+<LI><P>I recommend keeping around a CLEAN.dot template. You can create this as follows:</P>
+<UL>
+<LI>Exit from Word.
+<LI>Rename Normal.dot as, say, abNormal.dot.
+<LI>Restart Word.
+<LI>Exit from Word and say Yes when asked to save changes to the Normal template.
+<LI>Rename the new Normal.dot as Clean.dot, or some other name of your choosing.
+<LI>Rename abNormal.dot back to Normal.dot.
+</UL>
+<P>Clean.dot is the minimal Normal template created when you first install Word. It has only default settings, but can be very useful.</P>
+<LI>Make a copy of Clean.dot, let's call this SafetyNet.dot.
+<LI>Start Word.
+<LI>Create a new document based on the SafetyNet.dot template.
+<LI>Suppose that there are some macros in, say, Suspect.dot that you wish to examine, but are reluctant to allow the macros to execute. Use the Organizer in the Macro dialog to copy 
+those macros to SafetyNet.dot and then open the macros for viewing from SafetyNet.dot.
+</OL>
+<P>In order to view a macro:</P>
+<UL>
+<LI>In Word 6/7, the macro must be editable.
+<LI>In Word 8, the macro may not be in a password protected project, or you must know the password.
+</UL>
+</BODY>
+</HTML>

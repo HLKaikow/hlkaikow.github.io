@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>An example of converting WordBasic to VBA</TITLE>
+		<script type="text/javascript" src="../GetURL.js"></script>
+<LINK REV="made" HREF="mailto:kaikow@standards.com" TITLE="An example of converting WordBasic to VBA">
+</HEAD>
+<BODY>
+<p>You are visitor number <img src="../counter.cnt%3FExampleWB2VBA"
+alt="?????"> since 14 October 2004.
+<br><a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+<p>Copyright &copy; 2000-2001 by Howard Kaikow. All rights reserved.
+<BR>Date: 16 December 2000
+<BR>From: Howard Kaikow &lt;kaikow@standards.com&gt;
+<BR>Subject: An example of converting WordBasic to VBA</p>
+<HR>
+<p>When you open a Word 6/7 template in Word 8, or later version, Word  attempts to automatically convert the 
+WordBasic macros to VBA macros. Much of this is done by using the WordBasic object to run the WordBasic commands. 
+I discuss this further in <A href="WordBasicBrokenInVBA.html" onclick="this.href = GetURL('http://www.standards.com/OhMyWord/WordBasicBrokenInVBA.html')">WordBasic is broken in VBA</A>.</p>
+<p>Converting to pure VBA has at least the following advantages:</p>
+<UL>
+<li>WordBasic does not support the new capabilities in the Word object model.</li>
+<li>Some WordBasic statements do not work properly via the WordBasic objects and must be recoded in VBA.</li>
+<li>There are very superior programming techniques that may be used with &quot;pure&quot; VBA. 
+VBA likely has lower programming and support costs than WordBasic.</li>
+</ul>
+<P>Let us start with the following WordBasic macro.</p>
+<pre>Sub MAIN()
+ScreenUpdating 0
+WaitCursor 1
+StartOfDocument
+While Not AtEndOfDocument()
+        WordRight 1, 1
+        If ChangeCase() = 1 Then
+                Bold 1
+        Else
+                Italic 1
+        End If
+        WordRight
+Wend
+WaitCursor 0
+ScreenUpdating 1
+End Sub</pre>
+<p>When imported into VBA, the code gets automatically converted to 
+(I've added a comment to indicate a module name modWordsImportedWordBasic):</P>
+<pre>'modWordsImportedWordBasic
+Option Explicit
+Public Sub MAIN()
+WordBasic.ScreenUpdating 0
+WordBasic.WaitCursor 1
+WordBasic.StartOfDocument
+While Not WordBasic.AtEndOfDocument()
+    WordBasic.WordRight 1, 1
+    If WordBasic.ChangeCase() = 1 Then
+        WordBasic.Bold 1
+    Else
+        WordBasic.Italic 1
+    End If
+    WordBasic.WordRight
+Wend
+WordBasic.WaitCursor 0
+WordBasic.ScreenUpdating 1
+End Sub</pre>
+<P>As I indicated in <A href="WordBasicBrokenInVBA.html" onclick="this.href = GetURL('http://www.standards.com/OhMyWord/WordBasicBrokenInVBA.html')">WordBasic is broken in VBA</A>,
+not all WordBasic statements work in VBA. For example, note the effect of the
+ScreenUpdating and WaitCursor statements. Those statements might not work in
+your version of VBA. In more complex WordBasic macros, it is likely that some
+statements, though syntactically converted, will produce unexpected results. But
+let's ignore that problem for now.</P>
+<P>Let us now make a simple change to the macro:</P>
+<pre>'modWordsWordBasicObject
+Option Explicit
+Public Sub MAIN()
+    With WordBasic
+        .ScreenUpdating 0
+        .WaitCursor 1
+        .StartOfDocument
+        While Not .AtEndOfDocument()
+            .WordRight 1, 1
+            If .ChangeCase() = 1 Then
+                .Bold 1
+            Else
+                .Italic 1
+            End If
+            .CharRight
+        Wend
+        .WaitCursor 0
+        .ScreenUpdating 1
+    End With
+End Sub</pre>
+<P> modWordsWordBasicObject is a lot easier to read, even though we are still using the WordBasic object.</P>
+<P>OK, feeling couragous, now let us convert the macro to pure VBA, eliminating
+all use of the WordBasic object.</P>
+<pre>'modWordsUseCountLoop
+Option Explicit
+Public Sub WordsUseCountLoop()
+    Dim lngIndex As Long
+    Application.ScreenUpdating = False
+    System.Cursor = wdCursorWait
+    With ActiveDocument
+        For lngIndex = 1 To .Words.Count
+            With .Words(lngIndex)
+                If .Case = wdUpperCase Then
+                    .Bold = True
+                Else
+                    .Italic = True
+                End If
+            End With
+        Next
+    End With
+    System.Cursor = wdCursorNormal
+    Application.ScreenUpdating = True
+End Sub</pre>
+<P>Here's another way to code the macro in VBA.</P>
+<pre>'modWordsUseWordsObject
+Option Explicit
+Public Sub WordsUseWordsObject()
+    Dim objMyWord As Object
+    Application.ScreenUpdating = False
+    System.Cursor = wdCursorWait
+    With ActiveDocument
+        For Each objMyWord In .Words
+            With objMyWord
+                If .Case = wdUpperCase Then
+                    .Bold = True
+                Else
+                    .Italic = True
+                End If
+            End With
+        Next
+    End With
+    System.Cursor = wdCursorNormal
+    Application.ScreenUpdating = True
+End Sub</pre>
+<P>We are not done yet, here's another way to code the macro in VBA.</P>
+<pre>'modWordsUseExpand
+Option Explicit
+Public Sub WordsUseExpand()
+    Dim lngCount As Long
+    Dim lngIndex As Long
+    Dim rngCurrentRange As Range
+    Application.ScreenUpdating = False
+    System.Cursor = wdCursorWait
+    With ActiveDocument
+        Set rngCurrentRange = .Content
+        lngCount = .Words.Count
+    End With
+    rngCurrentRange.Collapse Direction:=wdCollapseStart
+    With rngCurrentRange
+        For lngIndex = 1 To lngCount
+            .Expand unit:=wdWord
+            If .Case = wdUpperCase Then
+                .Bold = True
+            Else
+                .Italic = True
+            End If
+            .Collapse Direction:=wdCollapseEnd
+        Next
+    End With
+    System.Cursor = wdCursorNormal
+    Application.ScreenUpdating = True
+End Sub</pre>
+</BODY></HTML>

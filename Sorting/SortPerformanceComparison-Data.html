@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Howard Kaikow's Sort Performance Comparison program - Data</title>
+		<script type="text/javascript" src="../GetURL.js"></script>
+	</head>
+<body>
+
+<p>You are visitor number <img alt="?????" src=
+"../counter.cnt%3FSortPerformanceComparison-Data"> since 29 February 2004</p>
+
+<p>
+ <a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+
+<p>Copyright &copy; 2003-2004 by Howard
+Kaikow. All rights reserved.</p>
+
+<p>Date: 6 March 2004<b>(Revision of 29 February 2004 version of 
+this document)</b></p>
+
+<p>Author: <a href=
+"mailto:kaikow@standards.com">Howard Kaikow</a>
+&lt;kaikow@standards.com&gt;</p>
+
+<p>Subject: Sort Performance Comparison program - Data</p>
+
+<hr>
+
+<p>Some of the sorting algorithms are very
+efficient, but a few, such as Bubble Sort, are relatively
+inefficient.</p>
+
+<p>For example, on a Pentium II 400 with 768MB of
+memory, using randomly ordered Long data, using version 1.0.0 of the program, I've
+seen:</p>
+
+<ul>
+
+<li>
+The program includes 4 implementations of the bubble sort algorithm. Using 3 000 data items, the time used was:
+</li>
+
+</ul>
+
+<blockquote>
+  <ul>
+    <li>KB: 585 milliseconds</li>
+    <li>S6.4: 584 milliseconds</li>
+    <li>S6.4#: 309 milliseconds</li>
+    <li>RS: 287 milliseconds</li>
+  </ul>
+</blockquote>
+
+<ul>
+<li>The program includes 17 implementations of the quicksort
+algorithm. Using 40 000 000 data items, the time used was:
+
+</li>
+</ul>
+
+<blockquote>
+<ul>
+  <li>(HK): 92475 millisecond</li>
+  <li>(HK#): 101754 milliseconds</li>
+  <li>(HK##): 94883 milliseconds</li>
+  <li>(S7.1): 100256 milliseconds</li>
+  <li>(S7.1=): 99097 milliseconds</li>
+  <li>(S7.1#): 100499 milliseconds</li>
+  <li>(S7.1#=): 103899 milliseconds</li>
+  <li>(S7.4): 94073 milliseconds</li>
+  <li>(S7.4=): 97041 milliseconds</li>
+  <li>(S7.4#): 94023 milliseconds</li>
+  <li>(S7.4#=): 94004 milliseconds</li>
+  <li>(S7.5): 57879 milliseconds</li>
+  <li>(S7.5#): 57140 milliseconds</li>
+  <li>(S7.5#M): 60242 milliseconds</li>
+  <li>(S7.5#M9): 56843 milliseconds</li>
+  <li>(S7.5#M9=): 56453 milliseconds</li>
+  <li>(RS): (OUT_OF_STACK_SPACE)</li>
+</ul>
+</blockquote>
+
+<p>There can be a significant difference in the time used by 
+differing implementations of the same algorithm.</p>
+
+</body>
+</html>

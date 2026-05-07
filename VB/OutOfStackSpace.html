@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Out of stack space</title>
+		<script type="text/javascript" src="../GetURL.js"></script>
+<link rev="made" href="mailto:kaikow@standards.com" title=
+"Out of stack space">
+</head>
+<body>
+<p>You are visitor number <img src="../counter.cnt%3FStackSpace"
+alt="?????"> since 11 February 2004.<br>
+<a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+
+<hr>
+<p>Copyright &copy; 2004 by Howard Kaikow. All rights
+reserved.<br>
+Date: 27 February 2004<br>
+From: Howard Kaikow &lt;kaikow@standards.com&gt;<br>
+Subject: Out of stack space (Revision of 24 February 2004 posting)</p>
+
+<hr>
+<p>On 31 January 2004, I posted the topic  &quot;Out of stack space: 
+Should I punt?&quot; in the  microsoft.public.vb.general.discussion 
+newsgroup.</p>
+<p>The code below will demonstrate the error if you comment out the Resume 
+statements.</p>
+<p>The Resume statements work around the error.</p>
+<blockquote>
+<pre>
+Option Explicit
+    Private Const strFormTitle As String = &quot;Whatever"
+    
+    Private Const OUT_OF_MEMORY As Long = 7
+    Private Const OUT_OF_STACK_SPACE As Long = 28
+    Private Const strOut_Of_Stack_Space As String = "(OUT_OF_STACK_SPACE)"
+    Private Const strOut_Of_Memory As String = "(OUT_OF_MEMORY)"
+
+Public Sub Main()
+    Dim strTemp As String
+    
+    Do
+        strTemp = Trim$(InputBox(prompt:="Number of data items?", Title:="Sample size", Default:=""))
+        On Error GoTo EndIt
+        Err.Raise OUT_OF_STACK_SPACE    ' Force stack space error
+        MsgBox Now, , "Cannot get here"
+EndIt:
+        If Err.Number &lt;&gt; 0 Then
+            ProcessError
+            Resume GoBoo
+        End If
+GoBoo:
+        On Error GoTo EndItAgain    ' Not sufficient to clear previous error
+        Err.Raise OUT_OF_STACK_SPACE    ' Force stack space error after real stack space error
+        MsgBox Now, , "Nor here"
+EndItAgain:
+        If Err.Number &lt;&gt; 0 Then
+            ' VB allows us to get here only if Resume was used above
+            ProcessError
+            Resume GoHoo
+        End If
+GoHoo:
+        MsgBox "VB allows us to get here only if Resume is used", , "Do we get here?"
+    Loop While Len(strTemp) = 0
+    MsgBox "We iz done!", , "That's all folks!"
+End Sub
+
+Private Sub ProcessError()
+    Dim strMessage As String
+    With Err
+        Select Case .Number
+            Case OUT_OF_STACK_SPACE
+                strMessage = strOut_Of_Stack_Space
+            Case OUT_OF_MEMORY
+                strMessage = strOut_Of_Memory
+            Case Else
+                strMessage = "Error " &amp; .Number &amp; ", " &amp; .Description
+                MsgBox strMessage &amp; vbCrLf &amp; _
+                    "If possible, processing will continue.", vbOKOnly, strFormTitle
+        End Select
+    End With
+End Sub
+</pre>
+</blockquote>
+</body>
+</html>

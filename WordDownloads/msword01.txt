@@ -1,0 +1,33 @@
+I have found that many web sites are incorrectly set up to
+Download/View Microsoft Word documents. I am hoping that this message will be
+widely distributed to reduce occurrences of this problem.
+
+It is necessary to instruct a webserver that Word files are not plain text, 
+otherwise, they get downloaded/viewed as plain text and cannot be used by Word.
+This messes up some pointers within Word that appear to get cleared,
+at least with Win 95, only by rebooting. I have reported this to Microsoft.
+
+How one does this depends on whether you have an NCSA or a CERN based server. 
+If the web server does not have an appropriate type defined for Word, 
+i.e., for .doc and .dot files, then you will need to do something in your 
+local web server directories.
+
+In my case, the server is NCSA based so all I had to do was:
+
+1. Add a .htaccess file to the directory in which my index.html file lives. I 
+only needed to include the following line.
+
+AddType application/msword .doc
+
+This causes the webserver to treat the .doc files as binary.
+A similar line is needed for .dot files.
+
+2. I had the Word files in my ftp directories. Apparently, the .htaccess file 
+applies only to the directories on the web server, so I simply added links to 
+the Word files from the web server directory to the ftp server directory and 
+now reference the Word files as if they were local files on the web server, 
+rather than via ftp.
+
+3. The .htaccess file must be readable by everyone, i.e., use chmod a=+r.
+
+

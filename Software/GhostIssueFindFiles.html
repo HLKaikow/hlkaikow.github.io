@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Failure to access files on Ghost 10 mounted volumes</title>
+		<script type="text/javascript" src="../GetURL.js"></script>
+	</head>
+	<body>
+		<p>You are visitor number <img src="../counter.cnt%3FGhostIssueFindFiles" alt="?????">
+			since 21 June 2006.<br>
+			<a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+		<hr>
+		<p>Date: 16 July 2006<strong>(Modification of 28 June 2006 document)</strong>
+			<br>
+			From: Howard Kaikow &lt;kaikow@standards.com&gt;
+			<br>
+			Subject: Failure to access files on Ghost 10 mounted volumes</p>
+		<hr>
+		<h2>The Problem</h2>
+		<p>It was my expectation that a sub using the usual recursive 
+			FindFirstFile/FindNextFile would be able to walk the directory tree on any 
+			logical volume.</p>
+		<p>
+			I have had no problems using the program with logical volumes that are on hard, 
+			floppy, optical, or ZIP drives; or with logical volumes that have been mounted 
+			by Acronis True Image 9.</p>
+		<P>In order to mount a volume from a backup program, the backup program has to 
+			supply a driver that interfaces with the native file system. Apparently, there 
+			are some differences in the way those drivers work for various products.</P>
+		<P>Some volumes mounted from Ghost 10 have not worked, i.e., the program hangs up 
+			trying to build a list of filenames for those volumes, and it is necessary to 
+			do a hard reboot. For one volume, the problem is reproducible well over 90 per 
+			cent of the time. I've had occasions in which the program will work for several 
+			consecutive runs on the same volume, and then fail on the next run.
+		</P>
+		<P>If I do a reboot, mount particlar Ghost volumes, then run the code, the code 
+			will hang most of the time.</P>
+		<P>To make matters more interesting, I converted the VB 6 code to VB .NET.</P>
+		<OL>
+			<LI>
+			I've only run the VB .NET code three times. The first two times worked, but the 
+			third failed, so the problem does appear to be independent of whether VB 6 or 
+			VB .NET (2003) is used.
+			<LI>
+				One time, I first ran the VB .NET code, then ran the VB 6 code, the VB6 code 
+				did not hang. Yet I immediately rebooted, and ran the VB 6 code, and the VB 6 
+				code hung.
+			</LI>
+		</OL>
+		<P>There's nothing in the VB 6 or VB .NET code that could be expected to behave 
+			differently depending on how a volume was mounted.</P>
+		<P>Note that the volumes mounted have approximately the same number of files and 
+			the depth of the directory hierarchy is identical.</P>
+		<P>I am using Windows 2000.</P>
+		<p>
+			I was wondering whether the problem was in Ghost or I made some programming 
+			error. I have posted the VB 6 and VB .NET code, and, for those not having 
+			either VB 6 or VB .NET, the executable from the VB 6 code. The code is really 
+			simple, and about two pages long. The question is whether the code is correct, 
+			not whether the code runs correctly on a system, as it may be difficult to 
+			reproduce the problem.</p>
+		<p>
+			I may know how to reproduce the problem on other systems, but such details 
+			obscure the real issue, i.e., do other programmers find any problems in the 
+			code?</p>
+		<p>If it is determined that the code is correct, the only factor left seems to be 
+			the Ghost 10 driver. Before I decide whether I want to (Ugh!) deal with 
+			Symantec "support", I'd like others to validate the code.</p>
+		<h2>How to run the test</h2>
+		<p>To assure that Windows has not cached some file structures, it is necessary to 
+			reboot before running the test.</p>
+		<ol>
+			<li>
+				Reboot.</li>
+			<li>
+				Run Ghost 10. Selecting Recovery and then use Explore to mount all the volumes. Close Ghost.</li>
+			<li>
+				Run the test program on each volume.</li>
+			<li>
+				For each volume, the program will try to access all files on the volume, and 
+				increment a counter as it progresses.
+				<p>If the problem I have described occurs for a particular drive, it is expected 
+					that the system will hang and you will have to do a hard reboot by powering 
+					down the computer. So you should not run other programs, that cannot be 
+					interrupted, while running this test.</p>
+			</li>
+			<li>
+				If you do have to do a hard reboot, when the system restarts, go to your 
+				system's temporary files directory and delete all the files with names that 
+				start with PQICACHE. The files may, or may not, be in a directory named 
+				V2ibrowserTemp. There will be 1 such file for each drive you mounted from Ghost 
+				10.</li>
+			<li>
+				If none of the drives have failed, it is still necessary to reboot, and repeat 
+				the above sequence, to determine whether the problem will occur. I've had to 
+				repeat the sequence 2 or 3 times to detect the problem</li>
+		</ol>
+		<blockquote>
+			<p><A href="GhostIssueFindFiles1.0.0.0.zip" onclick="this.href = GetURL('http://www.standards.com/Software/GhostIssueFindFiles1.0.0.0.zip')">Download the Visual Basic 6 
+					project</A></p>
+			<p><A href="SimpleEXE1.0.0.0.zip" onclick="this.href = GetURL('http://www.standards.com/Software/SimpleEXE1.0.0.0.zip')">Download the Visual Basic 6 executable</A></p>
+			<p><A href="FindFirstFile-VB.NET1.0.0.0.zip" onclick="this.href = GetURL('http://www.standards.com/Software/FindFirstFile-VB.NET1.0.0.0.zip')">Download the Visual Basic 
+					.NET (2003) solution</A></p>
+		</blockquote>
+	</body>
+</html>

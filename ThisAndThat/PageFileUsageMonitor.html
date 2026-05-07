@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Windows (vers 22 March 2008), see www.w3.org">
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=us-ascii">
+
+  <title>Howard Kaikow's Page File Usage Monitor</title>
+  <script type="text/javascript" src="../GetURL.js">
+</script>
+  <style type="text/css">
+p.center {text-align: center}
+  p.justify {color:red; font-weight:bold; text-align: justify}
+  div.center {text-align: center}
+  </style>
+</head>
+
+<body>
+  <p>You are visitor number <img alt="?????" src=
+  "../counter.cnt%3FPageFileUsageMonitor">
+  since 4 October 2003</p>
+
+  <p><a href="../indexmain.html" onclick=
+  "this.href = GetURL('http://www.standards.com/indexmain.html')">Go
+  to Howard Kaikow's home page</a></p>
+
+  <p>Copyright &copy; 2003-2009 by Howard Kaikow. All rights
+  reserved.</p>
+
+  <p><strong>Date: 25 April 2009</strong></p>
+
+  <p>Author: <a href=
+  "mailto:kaikow@standards.com?subject=PageFileUsageMonitor">Howard
+  Kaikow</a> &lt;kaikow@standards.com&gt;</p>
+
+  <p>Subject: Page File Usage Monitor program</p>
+  <hr>
+
+  <blockquote>
+    <p class="center"><a href=
+    "../Downloads/PageFileUsageMonitor.zip"
+    onclick=
+    "this.href = GetURL('http://www.standards.com/Downloads/PageFileUsageMonitor.zip')">
+    Download PageFileUsageMonitor.zip</a> <strong>(version
+    2.2.0.5)</strong></p>
+  </blockquote>
+
+  <blockquote>
+    <p class="justify">It has come to my attention that a number of
+    web sites around this planet have copied various versions of
+    PageFileUsageMonitor to their own web sites. Only the latest
+    version should be used, and you can only be assured of getting
+    the latest version by downloading from this web page.</p>
+
+    <p class="justify">In addition, at least two of those files
+    have all numeric names, which makes them suspect as I have
+    never released such filenames.</p>
+  </blockquote>
+
+  <h1><a name="Overview" id="Overview">Overview</a></h1>
+
+  <p>I was wondering just how much of my system's paging files were
+  being used, so I threw together a Visual Basic 6 program to
+  report the information shown below.</p>
+
+  <p>The program reports on the current Windows session, so you
+  should run the program just before you reboot or power down the
+  system.</p>
+
+  <p>You may start the program, and have the information updated at
+  an interval you specify while the program is running. You may
+  wish to start the program immediately after rebooting.&nbsp;You
+  may wish to minimize the Form to get it out of the way.</p>
+
+  <h1>Output</h1>
+
+  <p>A log file named PagefileLog.txt is recorded in the same
+  directory in which you have placed the executable file. .</p>
+
+  <h1>Requirements</h1>
+
+  <p>In order to run this program, you will need to have the
+  following installed:</p>
+
+  <ul>
+    <li>
+      <p><b>Windows 2000, or later.</b></p>
+    </li>
+
+    <li>
+      <p><strong>WMI:</strong> The <strong>WinMgmt (Windows
+      Management Instrumentation)</strong> service must be
+      installed.</p>
+    </li>
+
+    <li>
+      <p><b>Either Microsoft Visual Basic 6 or the Microsoft Visual
+      Basic 6 run-time files:</b> If you have neither, then you can
+      download the Visual Basic 6 run-time files by following the
+      instructions in <a href=
+      "http://support.microsoft.com/default.aspx?scid=kb;EN-US;192461">
+      VBRun60.exe Installs Visual Basic 6.0 Run-Time Files</a>. In
+      both cases, you should be using the SP 6 update.</p>
+    </li>
+  </ul>
+
+  <p>I have developed the program using Microsoft Windows 2000, but
+  expect that the program will work in other Microsoft Windows
+  operating systems meeting the above requirements.</p>
+
+  <h1>Running the program</h1>
+
+  <p>There is no installation necessary, just directly run the
+  program by doubleclicking on the PageFileUsageMonitor.exe file,
+  or by using a shortcut to that file.</p>
+
+  <p>When you run the program, a Visual Basic 6 Form will be
+  displayed that looks something like the Form below. The Form was
+  designed using a screen resolution of 1280 x 1024. You may
+  minimize the Form to get it out of the way.</p>
+
+  <p>The Form includes the following controls.</p>
+
+  <p class="center"></p>
+
+  <table id="AutoNumber1" style="BORDER-COLLAPSE: collapse"
+  summary="Page File Usage Monitor" border="1">
+    <tr>
+      <td style="width:190; height=24">
+        <p class="center"><strong>Control</strong></p>
+      </td>
+
+      <td style="height:23">
+        <p class="center"><strong>Purpose</strong></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width:190; height=21">
+        <p style="TEXT-ALIGN: left"><strong>Hours, Minutes,
+        Seconds, Milliseconds</strong></p>
+      </td>
+
+      <td style="height:21">The update interval will be the sum of
+      the values you enter. For each unit of time, you may choose
+      one of the preset values or type the value.</td>
+    </tr>
+
+    <tr>
+      <td style="width:190; height=22">
+      <strong>Update/Stop</strong></td>
+
+      <td style="height:22">
+        <p>Update: Causes the information displayed, and added to
+        the file, to be updated at the specified interval.</p>
+
+        <p>Stop: Stops the updating.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width:190"><strong>Exit</strong></td>
+
+      <td>Exit the program.</td>
+    </tr>
+  </table>
+
+  <div class="center">
+    <script type="text/javascript">
+            document.write('<p><img src="http://www.standards.com/ThisAndThat/'&#32;+&#32;GetURL('http://www.standards.com/ThisAndThat/PageFileUsageMonitor.jpg')&#32;+&#32;'"><\/p>');
+    </script> <noscript>
+    <p><img alt="PageFileUsageMonitor" src=
+    "PageFileUsageMonitor.jpg"></p></noscript>
+  </div>
+
+  <h1>Pagefile on a removable drive</h1>
+
+  <p>If you add a pagefile to a removable drive, the operating
+  system might not ask you to reboot the system.</p>
+
+  <p>If you do not reboot the system, the OS may supply incorrect
+  values to this program. I have seen this behavior in Windows
+  2000, not tested in other operating systems.</p>
+
+  <p>You should reboot after making a change to the number, or
+  sizes, of pagefiles.</p>
+</body>
+</html>

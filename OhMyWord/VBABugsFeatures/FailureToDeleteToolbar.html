@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Failure to delete a toolbar</title>
+		<script type="text/javascript" src="../../GetURL.js"></script>
+	</head>
+	<body>
+		<p>You are visitor number <img src="../../counter.cnt%3FFailureDeleteToolbar" alt="?????">
+			since 2 October 2004.
+			<br>
+			<a href="../../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+		<hr>
+		<p>
+		Date: 3 October 2004<b>(Revision of 2 October 2004 version)</b>
+		<br>
+		From: Howard Kaikow &lt;kaikow@standards.com&gt;
+		<br>
+		Subject: Failure to delete a toolbar</p>
+		<hr>
+		<p>It should be possible to delete a toolbar, then rebuild the toolbar in the same 
+			Word template. However, there are circumstances in which the previous 
+			toolbar(s) are not deleted and they may mysteriously travel in position from 
+			left to right.</p>
+		<p>
+		Although the macro appears to delete the toolbar. When Word is exited and then 
+		restarted, there is more than one instance of the toolbar.
+		<p>This behavior has been seen in Word 2000, Word 2002, and Word 2003, but not in 
+			Word 97.</p>
+		<p><a href="../../ExcelDownloads/AreasBug.zip" onclick="this.href = GetURL('http://www.standards.com/ExcelDownloads/AreasBug.zip')">I am providing a 
+				.zip file that contains two Word templates.</a> At this time, I am 
+			providing templates that were created in Word 97, but the template should be 
+			usable in Word 97, Word 2000, Word 2002, and Word 2003.</p>
+		<p>Both templates should create a toolbar, "Test Toolbar", that you can use to run 
+			the macros to be tested.</p>
+		<p>
+		Each template has two macros. One creates a toolbar in the Normal template. The 
+		other creates the toolbar in the template itself.
+		<p>
+		My experience has been that the macro produces the expected result when the 
+		toolbar is created in the template itself, i.e., there is never more the one 
+		copy of the toolbar.
+		<p>
+		However, when the toolbar is created in the Normal template, eventually, more 
+		than one copy of the toolbar will be created in the Normal template and, 
+		eventually, the toolbar(s) will travel from left to right on subsequent 
+		invocations of the macro.
+		<p>In order to reproduce the results, please do exactly the following:</p>
+		<ol>
+			<li>
+			Save a copy of your Normal template so you can restore the original copy after 
+			testing
+			<li>
+			Double-click on the template I supplied.
+			<li>
+			Click the "TestCustomizationContextNormalTemplate" button.
+			<li>
+			Exit from Word, if requested, saving changes.
+			<li>
+			Start Word with the Normal template, then exit from Word.
+			<li>
+			Repeat steps 2 to 5 until the problem occurs. It may be necessary to repeat the 
+			steps two to three, or more, times.
+			<li>
+			When you are finished, restore your saved copy of the Normal template.
+		</ol>
+		<p>OK, now try creating the toolbar in the template itself.</p>
+		<ol>
+			<li>
+			Double-click on the template I supplied.
+			<li>
+			Click the "TestCustomizationContextMacroContainer" button.
+			<li>
+			Exit from Word, if requested, saving changes.
+			<li>
+				Repeat steps 1 to 3 until the you are satisfied the problem does not occur in 
+				this case. <a HREF="mailto:kaikow@standards.com?subject=Failure to delete toolbar">If 
+					the problem does occur, please let me know.</a>
+		</ol>
+		<p>
+		Note that copying the macros from the template to the Normal template and then 
+		running the macros in the Normal template does not avoid the error. Indeed, it 
+		is worse because then the MacroContainer context example also fails to produce 
+		correct behavior,
+	</body>
+</html>

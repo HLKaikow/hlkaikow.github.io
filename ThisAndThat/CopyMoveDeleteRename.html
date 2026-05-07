@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Windows (vers 22 March 2008), see www.w3.org">
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=us-ascii">
+
+  <title>Howard Kaikow's CopyMoveDeleteRename Program</title>
+  <script type="text/javascript" src="../GetURL.js">
+</script>
+  <style type="text/css">
+p.center {text-align: center}
+  div.center {text-align: center}
+  </style>
+</head>
+
+<body>
+  <p>You are visitor number <img alt="?????" src=
+  "../counter.cnt%3FCopyMoveDeleteRename">
+  since 9 October 2006</p>
+
+  <p><a href="../indexmain.html" onclick=
+  "this.href = GetURL('http://www.standards.com/indexmain.html')">Go
+  to Howard Kaikow's home page</a></p>
+
+  <p>Copyright &copy; 2006-2007 by Howard Kaikow. All rights
+  reserved.</p>
+
+  <p><strong>Date: 25 July 2007</strong></p>
+
+  <p>Author: <a href=
+  "mailto:kaikow@standards.com?subject=CopyMoveDeleteRename">Howard
+  Kaikow</a> &lt;kaikow@standards.com&gt;</p>
+
+  <p>Subject: CopyMoveDeleteRename program</p>
+  <hr>
+
+  <blockquote>
+    <p class="center"><a href=
+    "CopyMoveDeleteRename-VersionHistory.html#VersionHistory"
+    onclick=
+    "this.href = GetURL('http://www.standards.com/ThisAndThat/CopyMoveDeleteRename-VersionHistory.html#VersionHistory')">
+    Download the latest version of the CopyMoveDeleteRename
+    program</a></p>
+  </blockquote>
+
+  <h1><a name="Overview" id="Overview">Overview</a></h1>
+
+  <p>Due to some oddities in the file systems used by the Microsoft
+  Windows operating systems, one may find that particular
+  files:</p>
+
+  <ul>
+    <li>Cannot be restored from a backup archive, whether image or
+    file based, or an archive produced by say, a zip compression
+    program; or</li>
+
+    <li>Cannot be included in an archive produced by a file based
+    backup program, or an archive produced by, say, a zip
+    compression program; or</li>
+
+    <li>Cannot be defragmented; or</li>
+
+    <li>Cannot be accessed from a hard drive, even though the file
+    is listed by Windows Explorer; or</li>
+
+    <li>Have incorrect information associated with the files. For
+    example, Windows Explorer might indicate that file has a
+    non-zero length, but the file's properties might indicate that
+    the length is 0 (which is why a defragmentation program might
+    skip the files, or a dump program might display 0 bytes).</li>
+  </ul>
+
+  <p>The CopyMoveDeleteRename program is intended to faciltate the
+  recovery of some such files that cannot be processed by
+  particular backup programs or by the GUI built into certain
+  Microsoft Windows operating systems.</p>
+
+  <p>The program will operate on files that are included in logical
+  volumes recorded on the drives of a system, or are in logical
+  volumes created by mounting volumes from an archive created by,
+  say, a backup program.</p>
+
+  <h1>Actions</h1>
+
+  <p>The program will attempt to perform the following actions.</p>
+
+  <table id="Table1" style="BORDER-COLLAPSE: collapse" class=
+  "center" summary="CopyMoveDeleteRename program" border="1">
+    <tr>
+      <td style="width:86; height=24">
+        <p class="center"><strong>Action</strong></p>
+      </td>
+
+      <td style="height=23">
+        <p class="center"><strong>Description</strong></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width:86; height=21">
+        <p class="center" style="TEXT-ALIGN: left">
+        <strong>Move</strong></p>
+      </td>
+
+      <td style="height=21">
+        <p><strong>Move</strong> the selected file to the selected
+        destination path.</p>
+
+        <p>If the file has one of the problems described above, it
+        may not be possible to <strong>Move</strong> the file back
+        to its original location and retain the properties of the
+        original source file. It is safer to <strong>Copy</strong>
+        the source file, and then <strong>Delete</strong> the
+        original, after you are satisfied by the outcome of the
+        operations.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width:86; height=23">
+        <p style="TEXT-ALIGN: left"><strong>Copy</strong></p>
+      </td>
+
+      <td style="height=23"><strong>Copy</strong> the selected file
+      to the selected destination path.</td>
+    </tr>
+
+    <tr>
+      <td style="width:86; height=22"><strong>Delete</strong></td>
+
+      <td style="height=22">
+        <p><strong>Delete</strong> the selected file.</p>
+
+        <p>If it is not possible, or if you forget to request, that
+        the deleted file be moved to the Recycle bin, you will not
+        be able to recover the file in the usual way.</p>
+
+        <p>Prior to deleting, it is suggested that you first
+        <strong>Copy</strong> the file to verify that you really
+        wish to <strong>Delete</strong> the file.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width:86; height=22"><strong>Rename</strong></td>
+
+      <td style="height=22">
+        <p><strong>Rename</strong> the selected file.</p>
+
+        <p>If the file has one of the problems described above, it
+        may not be possible to <strong>Rename</strong> the file and
+        retain the properties of the original source file. It is
+        safer to <strong>Copy</strong> the source file, then
+        <strong>Rename</strong> the copy, and after you are
+        satisfied with the outcome of the operations, you may then
+        <strong>Delete</strong> the original source file.</p>
+
+        <p>The <strong>Rename</strong> action is intentionally kept
+        separate from the <strong>Copy</strong> and
+        <strong>Move</strong> operations to reduce the chance of an
+        undesireable result.</p>
+      </td>
+    </tr>
+  </table>
+
+  <h1>Output</h1>
+
+  <p>The program creates a log file named
+  LogCopyMoveDeleteRename.txt. The file will be created in the
+  directory in which CopyMoveDeleteRename.exe is installed. If the
+  file does not exist, the file will be created by the program. If
+  the file exists, the program will append to the end of the
+  file.</p>
+
+  <h1>Requirements</h1>
+
+  <p>The program was compiled using Microsoft Visual Basic 6 (with
+  SP 6).</p>
+
+  <p>In order to run this program, you will need to have the
+  following installed:</p>
+
+  <ul>
+    <li>
+      <p><b>Windows 2000, or later.</b></p>
+    </li>
+
+    <li>
+      <p><b>Either Microsoft Visual Basic 6 or the Microsoft Visual
+      Basic 6 run-time files:</b> If you have neither, then you can
+      download the Visual Basic 6 run-time files by following the
+      instructions in <a href=
+      "http://support.microsoft.com/default.aspx?scid=kb;EN-US;192461">
+      VBRun60.exe Installs Visual Basic 6.0 Run-Time Files</a>.</p>
+    </li>
+  </ul>
+
+  <h2>Restrictions</h2>
+
+  <p>I have developed the program using Microsoft Windows 2000, and
+  intentionally designed the program so that it will not work on
+  operating systems older than Microsoft Windows 2000.</p>
+
+  <h1>Running the program</h1>
+
+  <p>There is no installation necessary, just directly run the
+  program by double-clicking on the CopyMoveDeleteRename.exe file,
+  or by using a shortcut to that file.</p>
+
+  <p>When you run the program, a Visual Basic 6 Form will be
+  displayed that looks something like the Forms below. The Forms
+  were designed using a screen resolution of 1280 x 1024.</p>
+
+  <p>The Forms includes the following controls.</p>
+
+  <table id="AutoNumber1" style="BORDER-COLLAPSE: collapse" class=
+  "center" summary="CopyMoveDeleteRename program" border="1">
+    <tbody>
+      <tr>
+        <td style="width:190; height=24">
+          <p class="center"><strong>Control</strong></p>
+        </td>
+
+        <td style="height=23">
+          <p class="center"><strong>Purpose</strong></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="width:190; height=21">
+          <p style="TEXT-ALIGN: left"><strong>Select source drive,
+          Select source path, Select file</strong></p>
+        </td>
+
+        <td style="height=21">Select the source file you wish to
+        <strong>Move</strong>, <strong>Copy</strong>,
+        <strong>Delete</strong>, or <strong>Rename</strong>.</td>
+      </tr>
+
+      <tr>
+        <td style="width:190; height=21">
+          <p style="TEXT-ALIGN: left"><strong>Select destination
+          drive, Select destination path</strong></p>
+        </td>
+
+        <td style="height=21">Select the drive and path to which
+        you wish to <strong>Move</strong> or <strong>Copy</strong>
+        the selected source file.</td>
+      </tr>
+
+      <tr>
+        <td style="width:190; height=21"><strong>Destination
+        filename</strong></td>
+
+        <td style="height=21">If you choose to
+        <strong>Rename</strong>, you will be able to specify the
+        <strong>Destination filename</strong>.</td>
+      </tr>
+
+      <tr>
+        <td style="width:190; height=21">
+          <p style="TEXT-ALIGN: left"><strong>Action: Move
+          file</strong></p>
+        </td>
+
+        <td style="height=21"><strong>Move</strong> the selected
+        file to the selected destination path.</td>
+      </tr>
+
+      <tr>
+        <td style="width:190; height=21">
+          <p style="TEXT-ALIGN: left"><strong>Action: Copy
+          file</strong></p>
+        </td>
+
+        <td style="height=21"><strong>Copy</strong> the selected
+        file to the selected destination path.</td>
+      </tr>
+
+      <tr>
+        <td style="width:190; height=22"><strong>Action: Delete
+        file</strong></td>
+
+        <td style="height=22"><strong>Delete</strong> the selected
+        file. Use <strong>Delete Method</strong> to select whether
+        the file is to be deleted permanently.</td>
+      </tr>
+
+      <tr>
+        <td style="width:190; height=22"><strong>Action: Rename
+        file</strong></td>
+
+        <td style="height=22"><strong>Rename</strong> the selected
+        file.</td>
+      </tr>
+
+      <tr>
+        <td style="width:190"><strong>Delete Method</strong></td>
+
+        <td>Select whether you wish the program to attempt to send
+        the deleted file to the Recycle Bin.</td>
+      </tr>
+
+      <tr>
+        <td style="width:190"><strong>Perform Action</strong></td>
+
+        <td>After the source file has been selected, click on the
+        <strong>Perform Action</strong> button to attempt to
+        perform the selected <strong>Action</strong>.</td>
+      </tr>
+
+      <tr>
+        <td style="width:190"><strong>Exit</strong></td>
+
+        <td>Exit the program.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="center">
+    <script type="text/javascript">
+            document.write('<p><img src="http://www.standards.com/ThisAndThat/'&#32;+&#32;GetURL('http://www.standards.com/ThisAndThat/CopyMoveDeleteRenameCopy.jpg')&#32;+&#32;'"><\/p>');
+                document.write('<p><img src="http://www.standards.com/ThisAndThat/'&#32;+&#32;GetURL('http://www.standards.com/ThisAndThat/CopyMoveDeleteRenameMove.jpg')&#32;+&#32;'"><\/p>');
+                document.write('<p><img src="http://www.standards.com/ThisAndThat/'&#32;+&#32;GetURL('http://www.standards.com/ThisAndThat/CopyMoveDeleteRenameDelete.jpg')&#32;+&#32;'"><\/p>');
+                document.write('<p><img src="http://www.standards.com/ThisAndThat/'&#32;+&#32;GetURL('http://www.standards.com/ThisAndThat/CopyMoveDeleteRenameRename.jpg')&#32;+&#32;'"><\/p>');
+    </script> <noscript>
+    <p><img alt="CopyMoveDeleteRename Copy" src=
+    "CopyMoveDeleteRenameCopy.jpg"></p>
+
+    <p><img alt="CopyMoveDeleteRename Move" src=
+    "CopyMoveDeleteRenameMove.jpg"></p>
+
+    <p><img alt="CopyMoveDeleteRename Delete" src=
+    "CopyMoveDeleteRenameDelete.jpg"></p>
+
+    <p><img alt="CopyMoveDeleteRename Rename" src=
+    "CopyMoveDeleteRenameRename.jpg"></p></noscript>
+  </div>
+</body>
+</html>

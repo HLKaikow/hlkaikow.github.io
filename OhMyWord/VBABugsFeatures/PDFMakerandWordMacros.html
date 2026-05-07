@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>PDFMaker appears to cause problems when using Microsoft Word macros</title>
+		<script type="text/javascript" src="../../GetURL.js"></script>
+</head>
+<body>
+<p>You are visitor number <img src="../../counter.cnt%3FPDFMakerWord"
+alt="?????"> since 2 October 2004.<br>
+<a href="../../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+
+<hr>
+<p>Date: 2 October 2004
+<br>From: Howard Kaikow &lt;kaikow@standards.com&gt;
+<br>Subject: PDFMaker appears to cause problems when using Microsoft Word macros</p>
+
+<hr>
+<p>PDFMaker appears to cause problems when I run certain types of
+Microsoft Word macros. <a href="../../WordDownloads/PDFMakerProblem.zip" onclick="this.href = GetURL('http://www.standards.com/WordDownloads/PDFMakerProblem.zip')">This example demonstrates how to
+replicate an instance of a particular problem. </a>The details of the
+problem are described by comments within the code.</p>
+
+<p>Since posting the example, I have noticed yet another error that
+occurs when PDFMaker.dot is loaded as a global template.</p>
+
+<ul>
+<li>
+<p>Place the PDFMakerProblem.dot template in Microsoft Word's
+StartUp directory.</p>
+</li>
+
+<li>
+<p>Start Microsoft Word with a blank document attached to the
+Normal template.</p>
+</li>
+
+<li>
+<p>Run the macro in the PDFMakerProblem.dot template loaded in the
+StartUp directory.</p>
+</li>
+
+<li>
+<p>Exit from Microsoft Word.</p>
+</li>
+
+<li>
+<p>This results in a Type 13: Type mismatch error.</p>
+</li>
+
+<li>
+<p>Restart Microsoft Word, and unload PDFMaker.dot before repeating
+the above steps.</p>
+</li>
+
+<li>
+<p>Exiting from Microsoft Word now produces no error.</p>
+</li>
+</ul>
+
+<p>I have noticed that I can avoid the errors by doing the
+following:</p>
+
+<ul>
+<li>
+<p>Allow PDFMaker.dot to be loaded prior to my running my
+macro.</p>
+</li>
+
+<li>
+<p>Unloading PDFMaker.dot AFTER I run the macro.</p>
+</li>
+
+<li>
+<p>Exit from Microsoft Word. No error occurs, implying that
+PDFMaker is doing something naughty, as yet unknown (to me), at
+Exit.</p>
+</li>
+</ul>
+
+<p>So the interim solution is to include an AutoExit macro such as
+the following in my Normal template.</p>
+
+<pre>Public Sub AutoExit()
+    Dim addinTemp As AddIn
+    On Error Resume Next
+    Set addinTemp = AddIns("PDFMaker.dot")
+    If Err.Number = 0 Then
+        addinTemp.Installed = False
+    End If
+    On Error GoTo 0
+    On Error Resume Next
+    Set addinTemp = AddIns("PDFMakerA.dot")
+    If Err.Number = 0 Then
+        addinTemp.Installed = False
+    End If
+    On Error GoTo 0
+    Set addinTemp = Nothing
+End Sub
+</pre>
+</body>
+</html>

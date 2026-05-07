@@ -1,0 +1,924 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Howard Kaikow's Sort Performance Comparison program - Information</title>
+		<script type="text/javascript" src="../GetURL.js"></script>
+	</head>
+<body>
+<p>You are visitor number <img alt="?????" src=
+"../counter.cnt%3FSortPerformanceComparison-Information"> since 29 February 2004</p>
+
+<p><a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+
+<p>Copyright &copy; 2003-2005 by Howard Kaikow. All
+rights reserved.</p>
+
+<p>Date: 15 July 2005<b>(Revision of 3 September 2004 version of 
+this document)</b></p>
+
+<p>Author: <a href=
+"mailto:kaikow@standards.com">Howard Kaikow</a>
+&lt;kaikow@standards.com&gt;</p>
+
+<p>Subject: Sort Performance Comparison program -
+Information</p>
+
+<hr>
+<h1>Purpose of the program</h1>
+
+<p>This document provides information about my 
+<a href="SortPerformanceComparison-VersionHistory.html#VersionHistory" onclick="this.href = GetURL('http://www.standards.com/Sorting/SortPerformanceComparison-VersionHistory.html#VersionHistory')">Sort Performance
+Comparison Program</a>.
+
+<p>I will use this document to communicate certain
+information about the program</p>
+
+<p>In addition, you should <a href=
+"SortPerformanceComparison-Description.html"onclick="this.href = GetURL('http://www.standards.com/Sorting/SortPerformanceComparison-Description.html')">read the general
+information document for the program</a>.</p>
+
+<h2><a href="SortPerformanceComparison-Info.html#TechnicalDetails">Technical
+details</a></h2>
+
+<blockquote>
+<h3><a href="SortPerformanceComparison-Info.html#ScreenResolution">Screen
+resolution</a></h3>
+
+<h3><a href="SortPerformanceComparison-Info.html#Padding">Padding</a></h3>
+
+<h3><a href="SortPerformanceComparison-Info.html#TimerResolution">Timer
+resolution</a></h3>
+
+<h3><a href="SortPerformanceComparison-Info.html#Timing">Timing</a></h3>
+</blockquote>
+
+<h2><a href="SortPerformanceComparison-Info.html#SortingAlgorithms">Sorting
+algorithms</a></h2>
+
+<blockquote>
+<h3><a href="SortPerformanceComparison-Info.html#BubbleSort">Bubble sort</a></h3>
+
+<h3><a href="SortPerformanceComparison-Info.html#CountingSort">Counting sort</a></h3>
+
+<h3><a href="SortPerformanceComparison-Info.html#HeapSort">Heap sort</a></h3>
+
+<h3><a href="SortPerformanceComparison-Info.html#InsertionSort">Insertion
+sort</a></h3>
+
+<h3><a href="SortPerformanceComparison-Info.html#MergeSort">Merge sort</a></h3>
+
+<h3><a href="SortPerformanceComparison-Info.html#QuickSort">Quick sort</a></h3>
+
+<h3><a href="SortPerformanceComparison-Info.html#SelectionSort">Selection
+sort</a></h3>
+
+<h3><a href="SortPerformanceComparison-Info.html#ShellSort">Shell sort</a></h3>
+</blockquote>
+
+<hr>
+<h1><a name="TechnicalDetails">Technical
+details</a></h1>
+
+<blockquote>
+<h2><a name="ScreenResolution">Screen
+resolution</a></h2>
+
+<p>The VB 6 Forms used by the program were originally designed 
+for version 1.0.0
+using a screen resolution of 800 x 600, and have been viewed using
+resolutions of 1024 x 768 and 1280 x 1024. I am no longer using a resolution of 800 x 600 
+for this program.</p>
+
+<h2><a name="Padding">Padding</a></h2>
+
+<p>I had to make some decisions about the type of data to be 
+sorted. I chose to use only the Double, Long (32-bit signed integer) and String 
+data types.</p>
+
+<p>Prior to version 1.2.0, this program used only all numeric 
+data for the String data type. Version 1.2.0 includes an internal list of words 
+from which non-numeric data will be generated. Such data is not padded, or 
+aligned, and is passed to the sort routines as is.</p>
+
+<p>The program still supports using numeric string data which 
+raises the following issues.</p>
+
+<ul>
+  <li>
+
+<p>Unlike a
+VBA ListBox, a VB 6 ListBox does not have a TextAlign property, so
+I could not right-justify the numbers. Even if I could
+right-justify the numbers, for the non-integer data, the decimal
+marks would not line up.</p>
+
+  </li>
+  <li>
+
+<p>Sorting the String data as numbers requires
+the numbers  to be padded and aligned.</p>
+
+  </li>
+</ul>
+
+<p>I decided to pad, and align, the String data to avoid those
+problems. Making the strings longer slows down the string sorts,
+but does not invalidate the comparison among the string sorting
+methods.</p>
+
+<p>When using numeric string data, certain sorting algorithms are particularly
+affected.</p>
+
+<p>A VB 6 ListBox has a Sort property, but the sort
+is only alphanumeric. It is necessary to pad/align numeric data before
+sending the data to the VB 6 ListBox. The data is padded/aligned
+when created by the program, and the time to do so is not counted
+in the time to do the sort. However, Double and Long data need to
+be padded/aligned during the sort. This imposes a penalty when
+using the Double or Long data type with the VB 6 ListBox sort
+method.</p>
+
+<p>The counting sort algorithm will work only with
+numeric integer data. In order to offer a String option for the
+counting sort algorithm, I had to create a variation of the
+algorithm that treats strings as numbers. For all but one of the
+counting sort algorithms, this requires padding during the sorting
+process.</p>
+
+<h2><a name="TimerResolution">Timer
+resolution</a></h2>
+
+<p>The program uses the QueryPerformanceFrequency
+API to detect whether a high resolution timer is available. The
+high resolution timer is used via the QueryPerformanceCounter API.
+Otherwise, the GetTickCount API is used for timing.</p>
+
+<p>When you start the program, before you choose
+any options, the ListBox near the top of the Form will indicate
+which timer is being used.</p>
+
+<h2><a name="Timing">Timing</a></h2>
+
+<p>There are three components that need to be
+timed:</p>
+
+<blockquote>
+<ol>
+<li>
+<p><b>Retrieval of the data from the data
+source</b></p>
+
+<p>The program generates the data and then writes
+the unsorted data to the data source. The program then determines
+the time needed to retrieve the data from the data source and to
+save the data in a one-dimensional array of the requested data
+type. This time is considered to be 0 if the source is an
+Array.</p>
+</li>
+
+<li>
+<p><b>Performing the sort</b></p>
+
+<p>The program sorts a copy of the original
+unsorted data so the original unsorted data may be reused.
+Depending on the sample size, the order of the source data, the
+data type, and the sorting method, the time to do the sort may be
+from less than one millisecond to, nearly, forever.</p>
+</li>
+
+<li>
+<p><b>Copying the sorted data to the target</b></p>
+
+<p>The time needed to copy the data to the target depends on the sort
+method used. For example,  if
+the target is a worksheet, this timing component is considered to
+be 0 if the Excel Worksheet Sort is used. Otherwise the sorted data needs to be moved from the Excel
+worksheet to the selected source and the timing component will not
+be 0.</p>
+</li>
+</ol>
+</blockquote>
+
+<h2><a name="SortingAlgorithms">Sorting
+algorithms</a></h2>
+
+<p>There is much published literature addressing
+sorting algorithms. I am not claiming that any of the
+implementations of any algorithms in the program are the best for
+any particular algorithm. In some cases, I intentionally included
+some inefficiencies. However, even if they are inefficient, they
+still demonstrate how easy it is to do better than the
+following:</p>
+
+<blockquote>
+<ul>
+<li>
+<p>SortArray method of the WordBasic object in Word
+VBA.</p>
+</li>
+
+<li>
+<p>Sort method of the Range/Selection objects in
+Word VBA.</p>
+</li>
+
+<li>
+<p>Visual Basic 6 ListBox with the Sort property
+set to True.</p>
+</li>
+
+<li>
+<p>Sort method of the Range object in Excel
+VBA.</p>
+</li>
+</ul>
+</blockquote>
+
+<p>The source of the description of various sorting algorithms 
+is usually a journal article or a book. When I know, I will cite the
+source for a particular implementation.</p>
+
+<p>For each algorithm implementation, there are
+separate variations for each of the following, where xxx identifies the
+algorithm:</p>
+
+<blockquote>
+<ul>
+<li>
+<p>xxxL: Long data type, sorting the data.</p>
+</li>
+
+<li>
+<p>xxxD: Double data type, sorting the data.</p>
+</li>
+
+<li>
+<p>xxxS: String data type, sorting the data.</p>
+</li>
+
+<li>
+<p>pxxxD: Double data type, sorting pointers to the
+data.</p>
+</li>
+
+<li>
+<p>pxxxS: String data type, sorting pointers to the
+data.</p>
+</li>
+</ul>
+</blockquote>
+
+
+<p>In version 1.2.0, I added variations of xxxS and pxxxS to 
+accommodate non-numeric strings.</p>
+
+<p><a
+href="SortModules.zip" onclick="this.href = GetURL('http://www.standards.com/Sorting/SortModules.zip')">The sorting code is divided into a number of
+modules. The compiled code includes:</a>.</p>
+
+
+<blockquote>
+<table border="1" cellpadding="0" cellspacing="0" style=
+"border-collapse: collapse border-color: black" id="AutoNumber3">
+<tr>
+<td>
+<p><b>modSortDR</b></p>
+</td>
+<td>
+
+<p>On 29 December 2003, I found <a href=
+"http://www.devx.com/vb2themax/Article/19900">David
+Ring's article "A comparison of sorting algorithms</a>". David has
+given me permission to use his code so that it can be compared with
+other implementations of the algorithms of interest. David's code
+provides the xxxL, pxxxD and pxxxS variations. I created the xxxD and
+xxxS variations using the same algorithm used by David's xxxL
+variation. David has sent me an update to the code in his
+article.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>modSortHK</b></p>
+</td>
+<td>
+<p>Code that I wrote.</p>
+
+<p>I have removed code from modSortHK that used
+algorithms included in the other modules. There may be duplication
+among the other modules.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>modSortCRS</b></p>
+</td>
+<td>
+<p>The algorithms, and modifications of those
+algorithms, in this module are based on the algorithm descriptions
+in "Algorithms in C, Third Edition," by Robert Sedgewick,
+Addison-Wesley, 1998.</p>
+
+<p>In some code, I use the mechanism for
+determining the pivot in the article by Jon L. Bentley and M.
+Douglas McIlroy, Engineering a Sort Function, Software-Practice and
+Experience, vol. 23(11), 1249-1265 (November 1993).</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>modSortRS</b></p>
+</td>
+<td>
+<p>The algorithms, and modifications of those
+algorithms, in this module are based on the code presented with the
+algorithm descriptions in "Ready-to-Run Visual Basic Algorithms",
+Second Edition, by Rod Stephens, John Wiley, 1998.</p>
+
+<p>The book explicitly states that the code can be
+used, but the code is only available on the CD-ROM with the book.
+The code is not available at either the publisher's or author's web
+site.</p>
+
+<p>The code in the book is used for the xxxL
+variation. I created the xxxD,xxxS, pxxxD and pxxxS
+variations using the same algorithm used by the xxxL variation.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>modSortKB</b></p>
+</td>
+<td>
+<p>The algorithms in this module are based on the
+code in the Microsoft Knowledge Base article Q169617, dated 29
+April 2001. I modified the code as follows:</p>
+
+<ul>
+<li>
+<p>Removed code for testing timing.</p>
+</li>
+
+<li>
+<p>Renamed procedures</p>
+</li>
+
+<li>
+<p>The code in the article uses the Variant data
+type. The code in this module uses a separate procedure for each
+data type, and adds the pointer variations for each algorithm.</p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+
+</blockquote>
+
+<h3><a name="BubbleSort">Bubble sort</a></h3>
+
+<blockquote>
+
+<table border="1" cellpadding="0" cellspacing="0" style=
+"border-collapse: collapse border-color: black" id="AutoNumber2">
+<tr>
+<td>
+<p><b>Implementation</b></p>
+</td>
+<td>
+<p><b>Comments</b></p>
+</td>
+</tr>
+
+<tr>
+<td><b>KB</b></td>
+<td>
+<p>Based on KB article Q169617.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S6.4</b></td>
+<td>
+<p>Based on Program 6.4 in Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S6.4#</b></td>
+<td>
+<p>Based on a modification, by Howard Kaikow, of Program 6.4 in
+Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>RS</b></p>
+</td>
+<td>
+<p>xxxL is in Rod Stephens book. xxxD, xxxS, pxxxD
+and pxxxS were created by Howard Kaikow based on xxxL.</p>
+</td>
+</tr>
+</table>
+
+</blockquote>
+
+<h3><a name="CountingSort">Counting sort</a></h3>
+
+<blockquote>
+
+<p>Pointer variations are not provided for the counting sort 
+algorithm.</p>
+
+<table border="1" cellpadding="0" cellspacing="0" style=
+"border-collapse: collapse border-color: black" id="AutoNumber5">
+<tr>
+<td>
+<p><b>Implementation</b></p>
+</td>
+<td>
+<p><b>Comments</b></p>
+</td>
+</tr>
+
+<tr>
+<td><b>HK</b></td>
+<td>
+<p>Concocted by Howard Kaikow.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S6.17</b></td>
+<td>
+<p>Based on Program 6.17 in Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S6.17#</b></td>
+<td>
+<p>Based on a modification, by Howard Kaikow, of Program 6.17 in
+Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>RS</b></p>
+</td>
+<td>
+<p>xxxL is in Rod Stephens book. xxxD and xxxS,
+pxxxD were created by Howard Kaikow based on xxxL.</p>
+</td>
+</tr>
+</table>
+
+</blockquote>
+
+<h3><a name="HeapSort">Heap sort</a></h3>
+
+<blockquote>
+
+<table border="1" cellpadding="0" cellspacing="0" style=
+"border-collapse: collapse border-color: black" id="AutoNumber4">
+<tr>
+<td>
+<p><b>Implementation</b></p>
+</td>
+<td>
+<p><b>Comments</b></p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>RS#</b></p>
+</td>
+<td>
+<p>Created by Howard Kaikow by modifying RS in a
+minor way.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S9.7</b></td>
+<td>
+<p>Based on Program 9.7 in Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>DR</b></p>
+</td>
+<td>
+<p>xxxL, pxxxD and pxxxS were created by David
+Ring. xxxD and xxxS were created by Howard Kaikow based on
+xxxL.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>RS</b></p>
+</td>
+<td>
+<p>xxxL is in Rod Stephens book. xxxD, xxxS, pxxxD
+and pxxxS were created by Howard Kaikow based on xxxL.</p>
+</td>
+</tr>
+</table>
+
+</blockquote>
+
+<h3><a name="InsertionSort">Insertion sort</a></h3>
+
+<blockquote>
+
+<table border="1" cellpadding="0" cellspacing="0" style=
+"border-collapse: collapse border-color: black" id="AutoNumber6">
+<tr>
+<td>
+<p><b>Implementation</b></p>
+</td>
+<td>
+<p><b>Comments</b></p>
+</td>
+</tr>
+
+<tr>
+<td><b>HK</b></td>
+<td>
+<p>Concocted by Howard Kaikow.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S6.3</b></td>
+<td>
+<p>Based on Program 6.3 in Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>DR</b></p>
+</td>
+<td>
+<p>xxxL, pxxxD and pxxxS were created by David
+Ring. xxxD and xxxS were created by Howard Kaikow based on
+xxxL.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>RS</b></p>
+</td>
+<td>
+<p>xxxL is in Rod Stephens book. xxxD, xxxS, pxxxD
+and pxxxS were created by Howard Kaikow based on xxxL.</p>
+</td>
+</tr>
+</table>
+
+</blockquote>
+
+<h3><a name="MergeSort">Merge sort</a></h3>
+
+<blockquote>
+
+<table border="1" cellpadding="0" cellspacing="0" style=
+"border-collapse: collapse border-color: black" id="AutoNumber1">
+<tr>
+<td>
+<p><b>Implementation</b></p>
+</td>
+<td>
+<p><b>Comments</b></p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>RS#</b></p>
+</td>
+<td>
+<p>Created by Howard Kaikow by modifying RS to use
+Insertion sort, rather than Selection sort, to sort small segments.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S8.3</b></td>
+<td>
+<p>Based on Program 8.3 in Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S8.4</b></td>
+<td>
+<p>Based on Program 8.4 in Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S8.4#</b></td>
+<td>
+<p>Based on a modification, by Howard Kaikow, of Program 8.4 in
+Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S8.5</b></td>
+<td>
+<p>Based on Program 8.5 in Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>DR</b></p>
+</td>
+<td>
+<p>xxxL, pxxxD and pxxxS were created by David
+Ring. xxxD and xxxS were created by Howard Kaikow based on
+xxxL.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>RS</b></p>
+</td>
+<td>
+<p>xxxL is in Rod Stephens book. xxxD, xxxS, pxxxD
+and pxxxS were created by Howard Kaikow based on xxxL.</p>
+</td>
+</tr>
+</table>
+
+</blockquote>
+
+<h3><a name="QuickSort">Quick sort</a></h3>
+
+<blockquote>
+
+<table border="1" cellpadding="0" cellspacing="0" style=
+"border-collapse: collapse border-color: black" id="AutoNumber9">
+<tr>
+<td>
+<p><b>Implementation</b></p>
+</td>
+<td>
+<p><b>Comments</b></p>
+</td>
+</tr>
+
+<tr>
+<td><b>HK</b></td>
+<td>
+<p>Concocted by Howard Kaikow.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>HK#</b></td>
+<td>
+<p>Concocted by Howard Kaikow by modifying HK.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>HK##</b></td>
+<td>
+Concocted by Howard Kaikow by modifying HK#.</td>
+</tr>
+
+<tr>
+<td><b>S7.1</b></td>
+<td>
+<p>Based on Program 7.1 in Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S7.1=</b></td>
+<td>
+<p>Based on Program 7.1 in Robert Sedgewick's book. Some code was
+moved inline, no algorithmic change.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S7.1#</b></td>
+<td>
+<p>Based on a modification, by Howard Kaikow, of Program 7.1 in
+Robert Sedgewick's book. Algorithmic change.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S7.1#=</b></td>
+<td>
+<p>Based on S7.1#. Some code was moved inline, no algorithmic
+change from S7.1#.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S7.4</b></td>
+<td>
+<p>Based on Program 7.4 in Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S7.4=</b></td>
+<td>
+<p>Based on Program 7.4 in Robert Sedgewick's book. Some code was
+moved inline, no algorithmic change.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S7.4#</b></td>
+<td>
+<p>Based on a modification, by Howard Kaikow, of Program 7.4 in
+Robert Sedgewick's book. Algorithmic change.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S7.4#=</b></td>
+<td>
+<p>Based on S7.4#. Some code was moved inline, no algorithmic
+change.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S7.5</b></td>
+<td>
+<p>Based on Program 7.5 in Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S7.5#</b></td>
+<td>
+<p>Based on a modification, by Howard Kaikow, of S7.5. Algorithmic change.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S7.5#M</b></td>
+<td>
+<p>Based on a modification, by Howard Kaikow, of S7.5#. Algorithmic change.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S7.5#M9</b></td>
+<td>
+<p>Based on a modification, by Howard Kaikow, of S7.5#. Algorithmic change.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S7.5#M9=</b></td>
+<td>
+<p>Based on a modification, by Howard Kaikow, of S7.5#M9. Some code was moved inline, no
+algorithmic change.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>RS</b></p>
+</td>
+<td>
+<p>xxxL is in Rod Stephens book. xxxD, xxxS, pxxxD
+and pxxxS were created by Howard Kaikow based on xxxL.</p>
+</td>
+</tr>
+</table>
+
+</blockquote>
+
+<h3><a name="SelectionSort">Selection sort</a></h3>
+
+<blockquote>
+
+<table border="1" cellpadding="0" cellspacing="0" style=
+"border-collapse: collapse border-color: black" id="AutoNumber7">
+<tr>
+<td>
+<p><b>Implementation</b></p>
+</td>
+<td>
+<p><b>Comments</b></p>
+</td>
+</tr>
+
+<tr>
+<td><b>S6.2</b></td>
+<td>
+<p>Based on Program 6.2 in Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S6.2#</b></td>
+<td>
+<p>Based on a modification, by Howard Kaikow, of Program 6.2 in
+Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>DR</b></p>
+</td>
+<td>
+<p>xxxL, pxxxD and pxxxS were created by David
+Ring. xxxD and xxxS were created by Howard Kaikow based on
+xxxL.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>RS</b></p>
+</td>
+<td>
+<p>xxxL is in Rod Stephens book. xxxD, xxxS, pxxxD
+and pxxxS were created by Howard Kaikow based on xxxL.</p>
+</td>
+</tr>
+</table>
+
+</blockquote>
+
+<h3><a name="ShellSort">Shell sort</a></h3>
+
+<blockquote>
+<table border="1" cellpadding="0" cellspacing="0" style=
+"border-collapse: collapse border-color: black" id="AutoNumber8">
+<tr>
+<td>
+<p><b>Implementation</b></p>
+</td>
+<td>
+<p><b>Comments</b></p>
+</td>
+</tr>
+
+<tr>
+<td><b>KB</b></td>
+<td>
+<p>Based on KB article Q169617.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>S6.5</b></td>
+<td>
+<p>Based on Program 6.5 in Robert Sedgewick's book.</p>
+</td>
+</tr>
+
+<tr>
+<td><b>HK</b></td>
+<td>
+<p>Concocted by Howard Kaikow.</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>DR</b></p>
+</td>
+<td>
+<p>xxxL, pxxxD and pxxxS were created by David
+Ring. xxxD and xxxS were created by Howard Kaikow based on
+xxxL.</p>
+</td>
+</tr>
+</table>
+
+</blockquote>
+
+</blockquote>
+</body>
+</html>

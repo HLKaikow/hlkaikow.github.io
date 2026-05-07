@@ -1,0 +1,309 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Windows (vers 22 March 2008), see www.w3.org">
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=us-ascii">
+
+  <title>Howard Kaikow's Compare Drive Using File Attributes
+  Program</title>
+  <script type="text/javascript" src="../GetURL.js">
+</script>
+  <style type="text/css">
+p.center {text-align: center}
+  div.center {text-align: center}
+  td.center {text-align: center}
+  </style>
+</head>
+
+<body>
+  <p>You are visitor number <img alt="?????" src=
+  "../counter.cnt%3FCompareDrives"> since 30
+  April 2006</p>
+
+  <p><a href="../indexmain.html" onclick=
+  "this.href = GetURL('http://www.standards.com/indexmain.html')">Go
+  to Howard Kaikow's home page</a></p>
+
+  <p>Copyright &copy; 2006-2007 by Howard Kaikow. All rights
+  reserved.</p>
+
+  <p><strong>Date: 16 July 2007</strong></p>
+
+  <p>Author: <a href=
+  "mailto:kaikow@standards.com?subject=Compare%20Drives%20Using%20Attributes%20Program">
+  Howard Kaikow</a> &lt;kaikow@standards.com&gt;</p>
+
+  <p>Subject: Compare Drives Using FileAttributes program</p>
+  <hr>
+
+  <blockquote>
+    <p class="center"><a href=
+    "CompareDrivesUsingFileAttributes-VersionHistory.html#VersionHistory"
+    onclick=
+    "this.href = GetURL('http://www.standards.com/ThisAndThat/CompareDrivesUsingFileAttributes-VersionHistory.html#VersionHistory')">
+    Download the latest version of the Compare Drives Using
+    FileAttributes program</a></p>
+
+    <p class="center"><a href=
+    "CompareDrivesUsingFileContent.html"
+    onclick=
+    "this.href = GetURL('http://www.standards.com/ThisAndThat/CompareDrivesUsingFileContent.html')">
+    Also, see the Compare Drives Using File Content
+    ("<b>Content</b>") program</a></p>
+  </blockquote>
+
+  <h1><a name="Overview" id="Overview">Overview</a></h1>
+
+  <p>The Compare Drives Using File Attributes ("<b>Attributes</b>")
+  program will create a list of the differences between logical
+  drives. Let us call these the <b>First</b> drive and the
+  <b>Second</b> drive. The program will enumerate the
+  following:</p>
+
+  <ul>
+    <li><b>Different</b>: These are files on the <b>First</b> drive
+    with the same path and name that exist on the <b>Second</b>
+    drive, and at least one <a href="CompareDrivesUsingFileAttributes.html#attributes">attribute</a> of
+    the files is different.</li>
+
+    <li><b>Not on Second</b>: These are files on the <b>First</b>
+    drive that do not have the same path and name on the
+    <b>Second</b> drive. Of course, these files might actually be
+    in a different path on the <b>Second</b> drive.</li>
+
+    <li><b>Not on First</b>: These are files on the <b>Second</b>
+    drive that do not have the same path and name on the
+    <b>First</b> drive. Of course, these files might actually be in
+    a different path on the <b>First</b> drive.</li>
+  </ul>
+
+  <p>Originally, the program was intended to determine which files
+  were included in an incremental/differential backup. This is
+  accomplished by asking a backup program to mount virtual drives
+  that are included in the backup at one point in time, and
+  mounting the corresponding virtual drives from a backup that was
+  done at another point in time.</p>
+
+  <p>The program can be used to determine the differences between
+  various pairs of logical drives. The process will take anywhere
+  from less than one second to several/many minutes per drive,
+  depending on the speed of the computer, and the number of files
+  on each drive.</p>
+
+  <h1>Output</h1>
+
+  <p>The program outputs a text file for each pair of drives
+  compared. The file will be created in the directory in which you
+  have placed the executable file. The file will be named
+  Attributes-<b>First</b>-<b>Second</b>.txt, where the selected
+  drive letters are used instead of <b>First</b> and
+  <b>Second</b>.</p>
+
+  <p>The program also outputs a text file named
+  CompareDrivesAttributesLog.txt. If the file does not exist, the
+  file will be created by the program. If the file exists, the
+  program will append to the end of the file.</p>
+
+  <h1>Requirements</h1>
+
+  <p>The program was compiled using Microsoft Visual Basic 6 (with
+  SP 6).</p>
+
+  <p>In order to run this program, you will need to have the
+  following installed:</p>
+
+  <ul>
+    <li>
+      <p><b>Windows 2000, or later.</b></p>
+    </li>
+
+    <li>
+      <p><b>Either Microsoft Visual Basic 6 or the Microsoft Visual
+      Basic 6 run-time files:</b> If you have neither, then you can
+      download the Visual Basic 6 run-time files by following the
+      instructions in <a href=
+      "http://support.microsoft.com/default.aspx?scid=kb;EN-US;192461">
+      VBRun60.exe Installs Visual Basic 6.0 Run-Time Files</a>.</p>
+    </li>
+  </ul>
+
+  <h2>Restrictions</h2>
+
+  <p>I developed the program using Microsoft Windows 2000, but
+  expect that the program will work in other Microsoft Windows
+  operating systems. I am aware of only the following
+  restrictions:</p>
+
+  <ul>
+    <li><b>Memory:</b> When first loaded, the program does not use
+    much memory. However, when analyzing each pair of drives, lists
+    are stored in the computer's memory for each drive. The size of
+    these lists depends on the number of files on each drive. The
+    memory is released after each pair of drives has been
+    processed. If the system is low in available memory, the
+    performance of other applications could be affected. And, if it
+    becomes necessary to use virtual memory, the pagefile will be
+    used and slow performance. Of course, this effect lasts only
+    while the program is running.</li>
+
+    <li>Long file names are used,</li>
+  </ul>
+
+  <h1>Running the program</h1>
+
+  <p>There is no installation necessary, just directly run the
+  program by double-clicking on the
+  CompareDrivesUsingFileAttributes.exe file, or by using a shortcut
+  to that file. When you run the program, a Visual Basic 6 Form
+  will be displayed that looks something like the Form below. The
+  Form was designed using a screen resolution of 1280 x 1024. The
+  Form includes the following controls.</p>
+
+  <p class="center"></p>
+
+  <table id="AutoNumber1" style="BORDER-COLLAPSE: collapse" border=
+  "1">
+    <tr>
+      <td class="center" style="width=190: height=21">
+      <strong>Control</strong></td>
+
+      <td class="center" style="height=21">
+      <strong>Purpose</strong></td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21">
+        <p style="TEXT-ALIGN: left"><strong>CheckBoxes and
+        SpinControls</strong></p>
+      </td>
+
+      <td style="height=21">Select the drives you wish to have
+      analyzed.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190"><strong>Clear All</strong></td>
+
+      <td>Clears all checkboxes and drive selections.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190"><strong>Select All</strong></td>
+
+      <td>Selects all the checkboxes for which a pair of drives has
+      been selected.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21"><strong>Update Drive
+      List</strong></td>
+
+      <td style="height=21">If logical drives are added, or
+      removed, <b>while</b> the program is running, you
+      <strong>must</strong> tell the program to update the drive
+      list.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190"><strong>Exit</strong></td>
+
+      <td>Exit the program.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190"><strong>Compare Drives</strong></td>
+
+      <td>Causes the program to analyze each pair of drives for
+      which a checkbox has been selected.</td>
+    </tr>
+  </table>
+
+  <div class="center">
+    <script type="text/javascript">
+            document.write('<p><img src="http://www.standards.com/ThisAndThat/'&#32;+&#32;GetURL('http://www.standards.com/ThisAndThat/CompareDrivesUsingFileAttributes.jpg')&#32;+&#32;'"><\/p>');
+    </script> <noscript>
+    <p><img alt="Compare Drives Using FileAttributes" src=
+    "CompareDrivesUsingFileAttributes.jpg"></p></noscript>
+  </div>
+
+  <h1><a name="attributes" id="attributes">Attributes</a></h1>
+
+  <p>The only attributes compared are the file size, creation time,
+  and modification time. If all three attributes are the same for
+  two files, then the <b>Attributes</b> program considers the files
+  to be identical in content.</p>
+
+  <p>This is a useful assumption for comparing a logical volume
+  with a very recent backup of the logical volume. However, in the
+  general case, we could have the following:</p>
+
+  <ul>
+    <li>If the size of two files is the same, the creation times or
+    modification times might differ, yet the files could have
+    identical content. In this case, the <b>Attributes</b> program
+    will report the files as <b>Different</b>.</li>
+
+    <li>All three attributes could be the same for both files, yet
+    the content of the files might differ. In this case, the
+    <b>Attributes</b> program will not report the files as
+    <b>Different</b>.</li>
+  </ul>
+
+  <p>The <a href=
+  "CompareDrivesUsingFileContent.html"
+  onclick=
+  "this.href = GetURL('http://www.standards.com/ThisAndThat/CompareDrivesUsingFileContent.html')">
+  <b>Content</b></a> program may be used to compare drives based on
+  file content.</p>
+
+  <h1>Issues</h1>
+
+  <ul>
+    <li>
+      <strong>Issue with virtual volumes mounted from Ghost
+      10:</strong>
+
+      <p>The program has no device dependencies, and should work
+      with any logical volume. The program has been used with
+      logical volumes on hard drives, flexibile disks, ZIP disks,
+      and optical media (CD-ROM, CD-R, and CD-RW). I do not have
+      DVD drives, but those should work as well.</p>
+
+      <p>In order to mount a volume from a backup program, the
+      backup program has to supply a file system filter driver that
+      interfaces with the native file system. Apparently, there are
+      some differences in the way those drivers are implemented for
+      various products. I have mounted virtual volumes using both
+      Acronis True Image 9 and Symantec Ghost 10.</p>
+
+      <p>All volumes that I have mounted using Acronis True Image 9
+      have worked with the Compare Drives Using File Content
+      program.</p>
+
+      <p>However, some volumes mounted from Ghost 10 have not
+      worked, i.e., the program hung up trying to <b>build</b> a
+      list of filenames for those volumes. Indeed, in this case,
+      you may have to do a hard reboot.</p>
+
+      <p>This makes no sense as the program processes all logical
+      volumes the same way and has no way of distinguishing between
+      actual logical volumes and virtual logical volumes, nor does
+      the program even know, or care, how the volumes were
+      mounted.</p>
+
+      <p><a href=
+      "../Software/GhostIssueFindFiles.html"
+      onclick=
+      "this.href = GetURL('http://www.standards.com/Software/GhostIssueFindFiles.html')">
+      The problem occurs in other programs using very simple
+      code.</a></p>
+
+      <p>It is possible that this problem occurs only in Microsoft
+      Windows 2000. I do not use Microsoft Windows XP.</p>
+    </li>
+  </ul>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Howard Kaikow's VBA Code Snippets</Title>
+<script type="text/javascript" src="../GetURL.js"></script>
+<style type="text/css">
+ol.alpha {list-style-type: lower-alpha; font-weight: bold}
+</style>
+
+</HEAD>
+<BODY>
+<p>You are visitor number <img src="../counter.cnt%3FVBASnippets" alt=
+"?????"> since 21 April 2001.</p>
+<p><a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a>
+<HR>
+<p>From time to time, I give or seek advice on using VBA in newsgroups and web forums.
+In order to share that knowledge, I may, from time to time, post information at my web site.</p>
+<P>In some cases, the code is complex, or requires the construction of a Userform. It is easier to communicate such information by 
+providing a Microsoft Word template file.</P>
+<P>You may download my <A href="../WordDownloads/HowardKaikowVBACodeSnippets.zip" onclick="this.href = GetURL('http://www.standards.com/WordDownloads/HowardKaikowVBACodeSnippets.zip')">VBA Code Snippets template</A> to see what, if any, 
+wisdom I have chosen to share.</P>
+<HR>
+<p>At this time, the template includes the following:
+<OL>
+<LI>Module modTestUserFormSDI, along with Userform frmUserformSDI: Microsoft Word 
+2000, at least on Windows, forces us to suffer with the SDI (Single Document Interface).
+One of the issues with SDI is when you, say, open a document, the running Userform may get covered by the newly opened document.
+In order to get around this problem, it is necessary to use Windows API calls to cause the focus to return to the Userform.
+<P>This example demonstrates how to Activate a window, open a file, create a document, and close a document, yet retain the focus on the Userform.</P>
+<div>
+<b>Notes:</b>
+<OL class=alpha>
+<li>This example will not run on a non-Windows system and is not intended to run with Microsoft Word 97, do not even try.</li>
+<li>This code is intended to be used only by very experienced VBA 
+programmers.</li>
+<li>I have not tested this example in Word 2002 or Word 2003 or Word 2007.</li>
+</OL>
+</div>
+<br>
+<LI>Module modTestGetArrayBounds: Sample code for determining the number of dimensions in an array, and the lower and upper bound for each dimension.
+</OL>
+</BODY>
+</HTML>

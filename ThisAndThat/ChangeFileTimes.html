@@ -1,0 +1,637 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Windows (vers 22 March 2008), see www.w3.org">
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=us-ascii">
+
+  <title>Howard Kaikow's Change File Times Program</title>
+  <script type="text/javascript" src="../GetURL.js">
+</script>
+  <style type="text/css">
+p.center {text-align: center}
+  p.left {text-align: left}
+  div.center {text-align: center}
+  </style>
+</head>
+
+<body>
+  <p>You are visitor number <img alt="?????" src="http://www.standards.com/ThisAndThat/counter.cnt?ChangeFileTimes">
+   since 2 August 2006</p>
+
+  <p><a href="../indexmain.html" onclick=
+  "this.href = GetURL('http://www.standards.com/indexmain.html')">Go
+  to Howard Kaikow's home page</a></p>
+
+  <p>Copyright &copy; 2006-2007 by Howard Kaikow. All rights
+  reserved.</p>
+
+  <p><strong>Date: 16 July 2007</strong></p>
+
+  <p>Author: <a href=
+  "mailto:kaikow@standards.com?subject=ChangeFileTimes">Howard
+  Kaikow</a> &lt;kaikow@standards.com&gt;</p>
+
+  <p>Subject: Change File Times Program</p>
+  <hr>
+
+  <blockquote>
+    <p class="center"><a href=
+    "ChangeFileTimes-VersionHistory.html#VersionHistory"
+    onclick=
+    "this.href = GetURL('http://www.standards.com/ThisAndThat/ChangeFileTimes-VersionHistory.html#VersionHistory')">
+    Download the latest version of the Change File Times
+    Program</a></p>
+
+    <p class="center"><a href=
+    "ChangePathTimes.html"
+    onclick=
+    "this.href = GetURL('http://www.standards.com/ThisAndThat/ChangePathTimes.html')">
+    Also, see the Change Path Times ("<b>Path Times</b>")
+    program</a></p>
+  </blockquote>
+
+  <h2><a name="Overview" id="Overview">Overview</a></h2>
+
+  <p>There are circumstances in which "incorrect" file times are
+  recorded. These include:</p>
+
+  <ul>
+    <li>Copying a file, or directory, may not preserve the original
+    times for the copied files or directory.</li>
+
+    <li>Restoring files, or directories, from a backup might not
+    preserve the original times for the restored files or
+    directories.</li>
+
+    <li>Restoring files, or directories, from a backup might result
+    in UTC times being used instead of the original times.</li>
+  </ul>
+
+  <p>The Change File Times ("<b>FileTimes</b>") program may be used
+  to change the Access, Creation, and Modification times for a
+  file. The program should work with either a file or a directory
+  file.</p>
+
+  <blockquote>
+    <h3>Access Times</h3>
+
+    <p>When changing times for directories, you should change times
+    for each subdirectory before you change times for the parent
+    directory.</p>
+
+    <p><a href=
+    "ChangePathTimes.html"
+    onclick=
+    "this.href = GetURL('http://www.standards.com/ThisAndThat/ChangePathTimes.html')">
+    The Change Path Times program</a> cheats and makes a second
+    pass on the directories, hoping to reduce this problem.</p>
+
+    <p>The Change File Times program is designed to work on one
+    file at a time. In batch processing mode, you might be able to
+    cheat by sorting the batch file appropriately.</p>
+  </blockquote>
+
+  <h2>Requirements</h2>
+
+  <p>The program was compiled using Microsoft Visual Basic 6 (with
+  SP 6).</p>
+
+  <p>In order to run this program, you will need to have the
+  following installed:</p>
+
+  <ul>
+    <li>
+      <p><b>Windows 2000, or later.</b></p>
+    </li>
+
+    <li>
+      <p><b>Either Microsoft Visual Basic 6 or the Microsoft Visual
+      Basic 6 run-time files:</b> If you have neither, then you can
+      download the Visual Basic 6 run-time files by following the
+      instructions in <a href=
+      "http://support.microsoft.com/default.aspx?scid=kb;EN-US;192461">
+      VBRun60.exe Installs Visual Basic 6.0 Run-Time Files</a>.</p>
+    </li>
+
+    <li>
+      <p><b>Microsoft Windows Common Controls-2 6.0
+      (MSCOMCT2.OCX):</b> If MSCOMCT2.OCX is not installed on your
+      system, you can download Microsoft Windows Common Controls-2
+      6.0 from <a href=
+      "http://activex.microsoft.com/controls/vb6/mscomct2.cab">http://activex.microsoft.com/controls/vb6/MSCOMCT2.CAB</a>.
+      If MSCOMCT2.OCX is not installed, MSCOMCT2.OCX will be
+      <a href="ChangeFileTimes.html#Installation">installed</a> when
+      ChangeFileTimes.exe is installed.</p>
+    </li>
+  </ul>
+
+  <h2>Restrictions</h2>
+
+  <p>I have developed the program using Microsoft Windows 2000. The
+  program will not work on operating systems older than Microsoft
+  Windows 2000.</p>
+
+  <p>The Forms used by this program were designed using a screen
+  resolution of 1280 x 1024, hopefully, there will be no problems
+  at other screen resolutions.</p>
+
+  <h2><a name="Installation" id="Installation">Installing the
+  program</a></h2>
+
+  <p>Run the program <a href=
+  "ChangeFileTimes-VersionHistory.html#VersionHistory"
+  onclick=
+  "this.href = GetURL('http://www.standards.com/ThisAndThat/ChangeFileTimes-VersionHistory.html#VersionHistory')">
+  InstallChangeFileTimes.exe</a>.</p>
+
+  <p>The program will be installed in a directory of your choosing
+  and will be assigned to the Howard Kaikow group in the Start
+  menu.</p>
+
+  <p>The program may be uninstalled from Add/Remove Programs in the
+  Control Panel.</p>
+
+  <h2>Output</h2>
+
+  <p>The program creates a log file named LogChangeFileTimes.txt.
+  The file will be created in the directory in which
+  ChangeFileTimes.exe is installed. If the file does not exist, the
+  file will be created by the program. If the file exists, the
+  program will append to the end of the file.</p>
+
+  <p>The log file is very important, and should be checked after
+  running the program. The log file lists the times that were
+  changed, and any errors encountered. If you inadvertently change
+  a file time, the information in the log file may be used to
+  restore the file times to a one second <a href=
+  "ChangeFileTimes.html#TimeResolution">resolution</a>.</p>
+
+  <h2>Running the program</h2>
+
+  <p>You may run the program from the Start menu, or by
+  double-clicking on the ChangeFileTimes.exe file, or by using a
+  shortcut to that file.</p>
+
+  <p>When you run the program, a Form will be displayed that looks
+  something like the following.</p>
+
+  <div class="center">
+    <script type="text/javascript">
+            document.write('<p><img src="http://www.standards.com/ThisAndThat/'&#32;+&#32;GetURL('http://www.standards.com/ThisAndThat/ChangeFileTimesStart.jpg')&#32;+&#32;'"><\/p>');
+    </script> <noscript>
+    <p><img alt="ChangeFileTimesStart" src=
+    "ChangeFileTimesStart.jpg"></p></noscript>
+  </div>
+
+  <p>If you select <strong>Process batch</strong>, you will be
+  asked to identify a <a href="ChangeFileTimes.html#BatchFile">file</a> listing the
+  changes you wish to make.</p>
+
+  <p>If you select <strong>Copy file times</strong>, or
+  <strong>Copy directory times</strong>, you will be asked to
+  select a file/directory for which the times are to be modified
+  and a file/directory from which the times are to be copied. A
+  Form will be displayed that looks something like the
+  following.</p>
+
+  <div class="center">
+    <script type="text/javascript">
+            document.write('<p><img src="http://www.standards.com/ThisAndThat/'&#32;+&#32;GetURL('http://www.standards.com/ThisAndThat/ChangeFileTimesCopy.jpg')&#32;+&#32;'"><\/p>');
+    </script> <noscript>
+    <p><img alt="ChangeFileTimesCopy" src=
+    "ChangeFileTimesCopy.jpg"></p></noscript>
+  </div>
+
+  <p>If you select <strong>Change file times</strong>, or
+  <strong>Change directory times</strong>, you will be asked to
+  select a file/directory for which the times are to be modified. A
+  Form will be displayed that looks something like the
+  following.</p>
+
+  <div class="center">
+    <script type="text/javascript">
+            document.write('<p><img src="http://www.standards.com/ThisAndThat/'&#32;+&#32;GetURL('http://www.standards.com/ThisAndThat/ChangeFileTimesAssign.jpg')&#32;+&#32;'"><\/p>');
+    </script> <noscript>
+    <p><img alt="ChangeFileTimesAssign" src=
+    "ChangeFileTimesAssign.jpg"></p></noscript>
+  </div>
+
+  <p>You also may select <strong>Copy file times</strong>, or
+  <strong>Copy directory times</strong>, and then select, as
+  appropriate, <strong>Change file times</strong> or <strong>Change
+  directory times</strong>.</p>
+
+  <p class="center"></p>
+
+  <table id="Table1" style="BORDER-COLLAPSE: collapse" summary=
+  "Change File Times program" border="1">
+    <tr>
+      <td style="width=190: height=21">
+        <p class="center"><strong>Control</strong></p>
+      </td>
+
+      <td style="height=21">
+        <p class="center"><strong>Purpose</strong></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21"><strong>Enforce time
+      order</strong></td>
+
+      <td style="height=21">If checked, the program will not change
+      a time if <strong>Modification Time</strong> is earler than
+      <strong>Creation Time</strong>, or if <strong>Access
+      Time</strong> is earler than either <strong>Creation
+      Time</strong> or <strong>Modification Time</strong>.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21"><strong>Preserve
+      Resolution</strong></td>
+
+      <td style="height=21">
+        <p>If unchecked, a time will be recorded only if it is
+        different than the original time.</p>
+
+        <p>If checked, a further comparison will be made using a
+        <a href="ChangeFileTimes.html#TimeResolution">resolution</a> of one second.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21"><strong>Creation
+      Time</strong></td>
+
+      <td style="height=21">
+        <p>If checked, the file's new <strong>Creation
+        Time</strong> may be changed when the <strong>Change
+        Times</strong> button is used.</p>
+
+        <p>If unchecked, the new <strong>Creation Time</strong>
+        will be set to the original <strong>Creation Time</strong>,
+        and the <strong>Creation Time</strong> will not be changed
+        when the <strong>Change Times</strong> button is used.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21"><strong>Modification
+      Time</strong></td>
+
+      <td style="height=21">
+        If checked, the file's new <strong>Modification
+        Time</strong> may be changed when the <strong>Change
+        Times</strong> button is used.
+
+        <p>If unchecked, the new <strong>Modification Time</strong>
+        will be set to the original <strong>Modification
+        Time</strong>, and the <strong>Modification Time</strong>
+        will not be changed when the <strong>Change Times</strong>
+        button is used.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21"><strong>Access
+      Time</strong></td>
+
+      <td style="height=21">
+        If checked, the file's new <strong>Access Time</strong> may
+        be changed when the <strong>Change Times</strong> button is
+        used.
+
+        <p>If unchecked, the new <strong>Access Time</strong> will
+        be set to the original <strong>Access Time</strong>, and
+        the <strong>Access Time</strong> will not be changed when
+        the <strong>Change Times</strong> button is used.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21"><strong>Back</strong></td>
+
+      <td style="height=21">Select another file or directory
+      file.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21"><strong>Exit</strong></td>
+
+      <td style="height=21">Exit the program.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21">
+        <p><strong>Change Times</strong></p>
+      </td>
+
+      <td style="height=21">Change the selected times. The times
+      for the file are not changed until the <strong>Change
+      Times</strong> button is used.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21">
+      <strong>Original</strong></td>
+
+      <td style="height=21">Lists the times currently recorded for
+      the file.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21">
+        <p style="TEXT-ALIGN: left"><strong>New</strong></p>
+      </td>
+
+      <td style="height=21">Lists the times that may be recorded
+      for the file when the <strong>Change Times</strong> button is
+      used. Several <a href="ChangeFileTimes.html#TimeSelection">mechanisms</a> are
+      provided for selecting the new file times.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21"><strong>Date and Time
+      Pickers</strong></td>
+
+      <td style="height=21">
+        <p>Set a new time.</p>
+
+        <p>Each part of the date and time is treated as a separate
+        field. If you highlight a field, you can use the up and
+        down arrow keys to change the value of the field. In
+        addition, if you click on the down arrow next to the date,
+        a calendar can be used to select a date.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21"><strong>Now</strong></td>
+
+      <td style="height=21">Sets the new time to the current time.
+      Behavior <a href="ChangeFileTimes.html#NowBehavior">depends</a> on whether
+      <strong>Enforce date order</strong> is checked.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21">
+        <p style="TEXT-ALIGN: left"><strong>UTC</strong></p>
+      </td>
+
+      <td style="height=21">Sets the new time to the UTC for the
+      original time.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21"><strong>Access</strong></td>
+
+      <td style="height=21">Sets the new <strong>Creation
+      Time</strong>, or <strong>Modification Time</strong>, to the
+      new <strong>Access Time</strong>.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21">
+      <strong>Creation</strong></td>
+
+      <td style="height=21">Sets the new <strong>Access
+      Time</strong>, or <strong>Modification Time</strong>, to the
+      new <strong>Creation Time</strong>.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190"><strong>Modification</strong></td>
+
+      <td>Sets the new <strong>Access Time</strong>, or
+      <strong>Creation Time</strong>, to the new
+      <strong>Modification Time</strong>.</td>
+    </tr>
+  </table>
+
+  <h2><a name="TimeSelection" id="TimeSelection">Time Selection
+  Mechanisms</a></h2>
+
+  <p>For each of the file times, you may choose a new time as
+  follows:</p>
+
+  <ul>
+    <li>Use the <strong>Date and Time Picker</strong> controls to
+    set the new time with a one second resolution.</li>
+
+    <li>Use the <strong>UTC</strong> button to set the new time to
+    the UTC for the original time.</li>
+
+    <li>Use the <strong>Access</strong>, <strong>Creation</strong>,
+    or <strong>Modification</strong> button to copy a time to the
+    new time.</li>
+
+    <li>
+      <a name="NowBehavior" id="NowBehavior"></a>If <strong>Enforce
+      date order</strong> is not checked, using the
+      <strong>Now</strong> button will set the new time to the
+      current time.<br>
+      If <strong>Enforce date order</strong> is checked, using the
+      <strong>Now</strong> button for:
+
+      <ul>
+        <li><strong>Creation Time</strong> will set the new time,
+        for all three times, to the current time.</li>
+
+        <li><strong>Modification Time</strong> will set the new
+        time, for both <strong>Access Time</strong> and
+        <strong>Modification Time</strong>, to the current
+        time.</li>
+
+        <li><strong>Access Time</strong> will set the new time, for
+        only <strong>Access Time</strong>, to the current
+        time.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2><a name="TimeResolution" id="TimeResolution">Time
+  Resolution</a></h2>
+
+  <p>It is not possible to preserve the full accuracy of a recorded
+  time value using typical user interfaces.</p>
+
+  <p>For example, when you select a file, "7/4/2006 01:29:10" might
+  be displayed for a file time. However, the internal
+  respresentation is more precise than a one second resolution.</p>
+
+  <p>If you use the <strong>Date and Time Picker</strong>, or any
+  other, controls to change the time, and then use the <strong>Date
+  and Time Picker</strong> controls to reset back to the original
+  time, it is highly likely that the result will be different than
+  the internal respresentation for the original time.</p>
+
+  <p>If you check the <strong>Preserve Resolution</strong> control,
+  the program willl compare the new and original times, and not
+  make a change if there is no difference using a one second
+  resolution.</p>
+
+  <p>If you uncheck the <strong>Preserve Resolution</strong>
+  control, you may inadvertently change a time by reducing the
+  accuracy of its internal representation.</p>
+
+  <p>If you wish to set a new time to the original time, uncheck
+  the box used to select the time to be changed.</p>
+
+  <p>If you wish to set a new time to the UTC time, use the
+  <strong>UTC</strong> button.</p>
+
+  <p>If you wish to set a new time to the current time, use the
+  <strong>Now</strong> button.</p>
+
+  <h2><a name="BatchFile" id="BatchFile">Batch File</a></h2>
+
+  <p>If you selected <strong>Process batch</strong>, you must
+  identify a <strong>Batch File</strong> listing all the changes
+  you wish to make.</p>
+
+  <p>The program will process each record in the <strong>Batch
+  File</strong>. The LogChangeFileTimes.txt file will indicate the
+  outcome of processing each record.</p>
+
+  <p>Each record must be terminated with a CARRIAGE RETURN
+  character followed by a LINE FEED character.</p>
+
+  <p>Each parameter in each record must be separated from any
+  following parameter in the record by a TAB character.</p>
+
+  <p>A record will be ignored if any duplicate or erroneous
+  parameter is detected.</p>
+
+  <p class="center"></p>
+
+  <table id="Table2" style="BORDER-COLLAPSE: collapse" summary=
+  "Change File Times program" border="1">
+    <tr>
+      <td style="width=276: height=21">
+        <p class="center"><strong>Purpose</strong></p>
+      </td>
+
+      <td style="height=21">
+        <p class="center"><strong>How to specify</strong></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width=276: height=21">
+        <p class="left"><strong>Comment</strong></p>
+      </td>
+
+      <td style="height=21">
+        <p class="left">Placing a SEMICOLON character at the
+        beginning of a record will cause the record to be
+        ignored.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width=276: height=21">
+        <p class="left"><strong>Destination file</strong></p>
+      </td>
+
+      <td style="height=21">
+        <p class="left">The file for which times are to be modified
+        is the <strong>Destination</strong> file. All records must
+        identify a <strong>Destination</strong> file</p>
+
+        <p class="left">The <strong>Destination</strong> file is
+        identified by <strong>D=<em>filespec</em></strong>, where
+        <strong><em>filespec</em></strong> is the full file path,
+        including the filename and filename extension, not enclosed
+        in quote characters.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width=276: height=21">
+        <p class="left"><strong>Source file</strong></p>
+      </td>
+
+      <td style="height=21">
+        <p class="left">The file from which times are to be copied
+        is the <strong>Source</strong> file. A record may identify
+        a <strong>Source</strong> file only if it is intended to
+        copy the times from the <strong>Source</strong> file to the
+        <strong>Destination</strong> file.</p>
+
+        <p class="left">The <strong>Source</strong> file is
+        identified by <strong>S=<em>filespec</em></strong>, where
+        <strong><em>filespec</em></strong> is the full file path,
+        including the filename and filename extension, not enclosed
+        in quote characters.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width=276: height=21">Copying the times from the
+      <strong>Source</strong> file to the
+      <strong>Destination</strong> file.</td>
+
+      <td style="height=21">
+        <p>If you have identified a <strong>Source</strong> file,
+        you may identify which of the times are to be copied.</p>
+
+        <p>The times may be identified using a single parameter
+        consisting of one, or more, with no duplicates, of the
+        following:</p>
+
+        <blockquote>
+          <p><strong>C</strong> to copy <strong>Creation
+          Time</strong>.<br>
+          <strong>M</strong> to copy <strong>Modification
+          Time</strong>.<br>
+          <strong>A</strong> to copy <strong>Access
+          Time</strong>.</p>
+        </blockquote>
+
+        <p>If this parameter is omitted, all three times will be
+        copied.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width=276: height=21">
+        <p class="left">Changing the times in the
+        <strong>Destination</strong> file when a
+        <strong>Source</strong> file is not identified.</p>
+      </td>
+
+      <td style="height=21">
+        <p>If you have not identified a <strong>Source</strong>
+        file, you must identify which of the times are to be
+        changed.</p>
+
+        <p>The times are identified using a separate parameter for
+        each time, with no duplicates, as follows:</p>
+
+        <blockquote>
+          <p>The <strong>Creation Time</strong> is specified by
+          <strong>C=<em>timespec</em></strong>, where
+          <strong><em>timespec</em></strong> is a time, not encosed
+          in quote characters, acceptable to the Visual Basic 6
+          IsDate function.</p>
+
+          <p>The <strong>Modification Time</strong> is specified by
+          <strong>M=<em>timespec</em></strong>, where
+          <strong><em>timespec</em></strong> is a time, not encosed
+          in quote characters, acceptable to the Visual Basic 6
+          IsDate function.</p>
+
+          <p>The <strong>Access Time</strong> is specified by
+          <strong>M=<em>timespec</em></strong>, where
+          <strong><em>timespec</em></strong> is a time, not encosed
+          in quote characters, acceptable to the Visual Basic 6
+          IsDate function.</p>
+        </blockquote>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>OLE Automation Problem (Word to PowerPoint)</title>
+		<script type="text/javascript" src="../../GetURL.js"></script>
+<style type="text/css">
+ol.alpha {list-style-type: lower-alpha; font-weight: bold}
+</style>
+</head>
+<body>
+<p>You are visitor number <img src="../../counter.cnt%3FOLEWordPowerpoint"
+alt="?????"> since 2 October 2004.
+<br><a href="../../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+
+<hr>
+<p>Date: 2 October 2004
+<br>From: Howard Kaikow &lt;kaikow@standards.com&gt;
+<br>Subject: OLE Automation Problem (Word to PowerPoint)</p>
+<hr>
+<p>When I Copy a selection from a Word document, then Paste into
+PowerPoint, a spurious OLE_Link<b>nn</b> bookmark is inserted into
+the Word document.</p>
+
+<p>This problem occurs with Word 2002, and does not occur with Word
+97 or Word 2000, not yet tested with Word 2003.</p>
+
+<p>The problem also occurs if I run the code from VB 6. In this
+case, I had to modify the code to start Word and, check that there
+was already a Word document open. I then imported the VB 6 code
+into VS .Net. Same problem. Due to a bug in VB .Net (see KB article
+Q315981), I had to slightly modify the VB .Net code.</p>
+
+<p>The bookmark is NOT created if PowerPoint is already running
+when the Word macro is run.</p>
+
+<p>If PowerPoint is NOT running when the Word macro is run, the
+bookmark is added to the Word document as a result of creating the
+new instance of PowerPoint, i.e., even before the Word macro Pastes
+into PowerPoint. Note that the bookmark is added ONLY if there is
+not already a bookmark marking the full text to be copied.</p>
+
+<p>I can reproduce the problem as follows:</p>
+
+<OL class=alpha>
+<li>
+<p>I created the macro in a brand new <a href=
+"../../WordDownloads/OLEPPT.zip" onclick="this.href = GetURL('http://www.standards.com/WordDownloads/OLEPPT.zip')">template</a> and added a reference to
+PowerPoint to the project.</p>
+</li>
+
+<li>
+<p>Make sure PowerPoint is not running.</p>
+</li>
+
+<li>
+<p>Double-click on the OLEPPT.dot template, which opens a blank
+document attached to the OLEPPT template.</p>
+</li>
+
+<li>
+<p>For this test, you need not insert any text in the Word
+document. If you do, just place the insertion point in the text
+before you run the Word macro</p>
+</li>
+
+<li>
+<p>Open the VBIDE, e.g., by using Alt + F11. Display the Immediate
+window so you can see the Debug.Print output.</p>
+</li>
+
+<li>
+<p>Run the macro.</p>
+</li>
+
+<li>
+<p>If the problem is reproduced, an OLE_Link<b>nn</b> bookmark will
+have been added to the Word document.</p>
+</li>
+
+<li>
+<p>The macro will have created a PowerPoint presentation file in
+your default Word directory. You can delete the file.</p>
+</li>
+
+<li>
+<p>OK, now delete the OLE_Link<b>nn</b> bookmark, start PowerPoint,
+and rerun the macro.</p>
+</li>
+
+<li>
+<p>Hopefully, you will now find that no OLE_Link<b>nn</b>
+bookmark has been added,</p>
+</li>
+
+<li>
+<p>The version of the macro I posted on 28 April 2002 will
+have created a PowerPoint presentation file in your default Word
+directory. You can delete the file. The 29 April 2002 version does
+not create that file.</p>
+</li>
+</ol>
+
+<p>I was using:</p>
+
+<ul>
+<li>
+<p>Word version 10.3416.3501 SP 1</p>
+</li>
+
+<li>
+<p>PowerPoint version 10.3506.3501 SP 1</p>
+</li>
+
+<li>
+<p>Windows 2000 (build 2195) SP 2</p>
+</li>
+
+<li>
+<p>Office XP Developer Edition SP 1</p>
+</li>
+
+<li>
+<p>VB 6 Enterprise SP 5</p>
+</li>
+
+<li>
+<p>Microsoft Development Environment 2002 version 7.0.9466</p>
+</li>
+
+<li>
+<p>Microsoft .Net Framework 1.0 version 1.3705</p>
+</li>
+
+<li>
+<p>Norton Antivirus 2002, I have the Office plug-in disabled</p>
+</li>
+
+<li>
+<p>Acrobat 5.0.5</p>
+</li>
+</ul>
+
+<p>The bookmark appears to be getting assigned as if a hard link
+was being used, rather than a Paste. The bookmark serves no
+purpose.</p>
+
+<p>That's a real crock as it causes Word to request that the
+user save the Word document even tho the user may have made no
+changes to the document. I could add code to eliminate that
+bookmark and set the document's Saved property to True if there is
+no other reason to remain at False, but that's an even bigger
+crock.</p>
+</body>
+</html>

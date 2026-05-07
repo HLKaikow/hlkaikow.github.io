@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>Howard Kaikow's Excel Fix Time Workbook</title>
+		<script type="text/javascript" src="../GetURL.js"></script>
+</head>
+
+<body>
+    <p>You are visitor number <img alt="?????"
+         src="../counter.cnt%3FFixTime"> since 20 June 2009</p>
+
+    <p><a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+
+    <p>Copyright &copy; 2009 by Howard Kaikow. All rights
+    reserved.</p>
+
+    <p><strong>Date: 20 June 2009</strong></p>
+
+    <p>Author: <a href="mailto:kaikow@standards.com?subject=Howard Kaikow's Excel Fix Time Workbook">
+    Howard Kaikow</a> &lt;kaikow@standards.com&gt;</p>
+
+    <p>Subject: Howard Kaikow's Excel Fix Time Workbook</p>
+    <hr>
+
+    <blockquote>
+        <p><a href="ExcelFixTimeDownload.html" onclick="this.href = GetURL('http://www.standards.com/ExcelDownloads/ExcelFixTimeDownload.html')">Download the latest version of
+        the program to create and use Howard Kaikow's Excel Fix
+        Time Workbook</a></p>
+    </blockquote>
+
+    <h2><a name="Overview">Overview</a></h2>
+
+    <p>On 11 May 2009, I switched from using the local telephone
+    company to a cable company for voice telephone. They allow
+    downloading a history of dialed, received and missed calls. It
+    is likely that other cable/VOIP/etc. companies also offer this
+    information for download.</p>
+
+    <p>I expected to be able to open a Microsoft Excel workbook,
+    and copy the data into the workbook, then perform simple
+    operations, such as using Excel's SUM function to find out how
+    much time I had spent on the phone, and for particular
+    numbers.</p>
+
+    <p>It was disappointing to find that the SUM function produced
+    a value of 0, unless I manually massaged the imported
+    data..</p>
+
+    <p>Of course, since I would be downloading more data at least
+    1-2 times per month, the manual fixing of things would get
+    rather tedious. So being a programmer, I have written an Excel
+    macro to do the deed.</p>
+
+    <p>I have decided to allow others to use the macro, with the
+    hope that companies will change the way they export the data,
+    perhaps, eliminating the need for the macro or manual massaging
+    of the data.</p>
+
+    <h2><a name="Installation">Installing the program and
+    DLL</a></h2>
+
+<p><a href="ExcelFixTimeDownload.html" onclick="this.href = GetURL('http://www.standards.com/ExcelDownloads/ExcelFixTimeDownload.html')">Download the latest version of
+        the program to create and use Howard Kaikow's Excel Fix
+        Time Workbook</a>
+    <p>Run the HowardKaikowExcelFixTime.exe program. The program
+    will:</p>
+
+    <ul>
+        <li>
+            Install the DLL in a directory of your choosing, and
+            will include the following in a group of your own
+            choosing in the Start menu. 
+
+            <ul>
+                <li>A shortcut to run CreateWorkbookFixTime.exe,
+                the program that creates the workbook.</li>
+
+                <li>A shortcut to uninstall the DLL. The DLL may
+                also be uninstalled from Add/Remove Programs in the
+                Control Panel.</li>
+            </ul>
+        </li>
+
+        <li>Provide a program, CreateWorkbookFixTime.exe, that may
+        be used to create a workbook, in a directory of your
+        choosing. You will be given an opportunity to create a
+        workbook just after the DLL has been installed.<br>
+         You may also run the CreateWorkbookFixTime.exe program
+        after the installation of the DLL. The workbook includes
+        the code necessary to run the macro using the installed
+        DLL. The macro is called FixTime. A toolbar button is
+        provided to run the FixTime macro. The toolbar is created
+        each time you open the workbook, and deleted when you close
+        the workbook.</li>
+    </ul>
+
+    <h2>Requirements</h2>
+
+    <p>The DLL and EXE were compiled using Microsoft Visual Basic 6
+    (with SP 6) and Microsoft Office 2003. The program should work
+    with Microsoft Excel 2003 and 2007. I have intentionally not
+    compiled the program to use Excel 97, Excel 2000 and Excel
+    2002, as I could not justify the time to do so and to test such
+    options.</p>
+
+    <p>To use the DLL and CreateWorkbookFixTime.exe, please note
+    the following requirements:</p>
+
+    <ul>
+        <li>
+            <p><b>Either Microsoft Visual Basic 6 or the Microsoft
+            Visual Basic 6 run-time files:</b> If you have neither,
+            then you can download the Visual Basic 6 run-time files
+            by following the instructions in <a href=
+            "http://support.microsoft.com/default.aspx?scid=kb;EN-US;192461">
+            VBRun60.exe Installs Visual Basic 6.0 Run-Time
+            Files</a>.</p>
+
+            <p>The program will not run on an OS earlier than
+            Microsoft Windows 2000, so you should already have the
+            Visual Basic 6 run-time files installed.</p>
+
+            <p>I believe that both Microsoft Office 2003, and 2007
+            already have the Visual Basic 6 run-time files
+            installed.</p>
+        </li>
+    </ul>
+
+    <h2>How to use the workbook and Fix Time macro</h2>
+
+    <p>The workbook is created with the code necessary to run the
+    macro and a reference to the DLL. In addition, there is code
+    that automatically creates the toolbar each time you open the
+    workbook and deletes the toolbar each time you close the
+    workbook.</p>
+
+    <p>The macro is used by selecting the troublesome cells in the
+    workbook, then clicking on the <b>Fix Time</b> button on the
+    toolbar. In Excel 2003, the toolbar should default to being
+    visible, if not make the toolbar visible. In Excel 2007, one
+    has to click on the Addins menu to display the toolbar.</p>
+
+    <p>To give you an idea of how to actually use the workbook, the
+    following is a description of what I have done since 11 May
+    2009:</p>
+
+    <ul>
+        <li>On 1 June 2009, I downloaded the history files from my
+        cable phone provider. The files were formatted as TAB
+        delimited text files.</li>
+
+        <li>
+            I then tried a number of different ways to import the
+            data into a Microsoft Excel 2003 workbook. In each
+            case, I ran into the problem I described in
+                <a href="ExcelFixTime.html#Overview">Overview</a>. THe easiest way
+                to import the values is to <b>COPY</b> them from
+                the text file, and <b>PASTE</b> into the desired
+                cells in each worksheet. 
+
+            <p>I fiddled around, and was able to get the data into
+            a form that would work with the <b>SUM</b> function.
+            Obviously, this would be too tedious to go through when
+            I added more data, at least once per month.</p>
+        </li>
+
+        <li>The macro, DLL, and EXE are now in a form that allows
+        me to make the critters available to others.</li>
+
+        <li>
+            So how did I use the macro on 19 June 2009? 
+
+            <ul>
+                <li>I used the CreateWorkbookFixTime.exe program to
+                create a workbook that has the macro and
+                toolbar</li>
+
+                <li>The workbok is created with 3 worksheets, so I
+                copied the worksheets from the workbook that I had
+                manually created in early June 2009.</li>
+
+                <li><b>Next, I downloaded the most recent history
+                for dialed, received and missed calls, copying
+                information for new calls into the relevant
+                worksheet, at the end of the previous corrected
+                data.</b></li>
+
+                <li><b>I then selected each set of cells that have
+                data on new calls and ran the macro to fix
+                things.</b></li>
+            </ul>
+
+            <p>Once the current values have been corrected, each
+            time one adds data, it is only necessary to apply the
+            <b>two bolded steps above</b>.</p>
+        </li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Case Else may disappear when importing WordBasic into VBA</title>
+		<script type="text/javascript" src="../GetURL.js"></script>
+<link rev="made" href="mailto:kaikow@standards.com" title=
+"Case Else may disappear when importing WordBasic into VBA">
+</head>
+<body>
+<p>You are visitor number <img src="../counter.cnt%3FCaseElseWB2VBA"
+alt="?????"> since 14 October 2004.
+<br><a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+
+<hr>
+<p>Copyright &copy; 1998-2001 by Howard Kaikow. All rights
+reserved.
+<br>Date: 12 March 2001
+<br>From: Howard Kaikow &lt;kaikow@standards.com&gt;
+<br>Subject: Case Else may disappear when importing WordBasic into
+VBA</p>
+
+<hr>
+<p>Back in 1998, I reported in various newsgroups/forums that I had
+encountered at least 8 instances of Word 8 discarding a Case Else
+statement when importing WordBasic macros.</p>
+
+<p>I have constructed a nonesense macro that reproduces this
+problem.</p>
+
+<p>The first macro listed is the Bad macro. The Case Else just
+before the cmp = 1 statement gets discarded when imported into Word
+8 or Word 9 from a WordBasic macro.</p>
+
+<p>I also include the Good macro listed below. This uses REM
+statements to comment out the statements that might be causing the
+problem. In that case, (no) pun intended, the Case Else is not
+discarded.</p>
+
+<p>Note that in this made up example, the outer Select Case &hellip; End
+Select is not needed, and its presence seems to cause the problem.
+Note that the real macro has code in the outer Select so the
+solution seems to be to convert the inner Select to If &hellip; End
+If.</p>
+
+<p>The missing Case Else statements were really hard to track down
+in the real code.</p>
+
+<hr>
+<h1>Bad macro</h1>
+
+<pre>
+REM Author email address: kaikow@standards.com
+REM macro BAD (12 December 1998)
+
+Sub MAIN
+    Flag = 2
+    strTemp$ = &quot;Bagels, Pizza&quot;
+    length = Len(strTemp$)
+    Select Case Flag
+'   Other cases deleted
+        Case Else
+            Buffer$ = Left$(strTemp$, 1)
+            ptr = 0
+            cmp = 0
+            While ptr &lt; length
+                Select Case Buffer$
+                    Case &quot;a&quot;
+                        cmp = 2
+                    Case Else
+                        cmp = 1
+                End Select
+                ptr = ptr + 1
+                If ptr &lt; length Then Buffer$ = &quot;Corned Beef&quot;
+            Wend
+    End Select
+    MsgBox Str$(cmp)
+End Sub
+</pre>
+
+<hr>
+<h1>Good macro</h1>
+
+<pre>
+REM Author email address: kaikow@standards.com
+REM macro Good (12 December 1998)
+
+Sub MAIN
+REM     Flag = 2
+    strTemp$ = &quot;Bagels, Pizza&quot;
+    length = Len(strTemp$)
+REM     Select Case Flag
+'   Other cases deleted
+REM         Case Else
+            Buffer$ = Left$(strTemp$, 1)
+            ptr = 0
+            cmp = 0
+            While ptr &lt; length
+                Select Case Buffer$
+                    Case &quot;a&quot;
+                        cmp = 2
+                    Case Else
+                        cmp = 1
+                End Select
+                ptr = ptr + 1
+                If ptr &lt; length Then Buffer$ = &quot;Corned Beef&quot;
+            Wend
+REM     End Select
+    MsgBox Str$(cmp)
+End Sub
+</pre>
+</body>
+</html>
+

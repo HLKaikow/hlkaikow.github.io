@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Macro recording is unreliable and not a good way to learn VBA</TITLE>
+		<script type="text/javascript" src="../GetURL.js"></script>
+<LINK REV="made" HREF="mailto:kaikow@standards.com" TITLE="Macro recording is unreliable and not a good way to learn VBA">
+</HEAD>
+<BODY>
+<p>You are visitor number <img src="../counter.cnt%3FMacroRecording"
+alt="?????"> since 14 October 2004.
+<br><a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+
+<P>Copyright &copy; 1999 by Howard Kaikow. All rights reserved.
+<BR>Date: 10 September 1999
+<BR>From: Howard Kaikow &lt;kaikow@standards.com&gt;
+<BR>Subject: Macro recording is unreliable and not a good way to learn VBA
+<HR>
+<P>It is often stated that one way to learn how to use Word VBA is to record macros and examine the resultant code. Unfortunately, one cannot trust the code produced by recording macros. For example:</P>
+<OL>
+<LI><P>Word performs certain operations when you issue commands through the user interface that are not reflected in the code recorded for those operations.</P>
+<P>One example is using the Edit | Find menu to search for text that is in a, say, header, when the cursor is in the body of the document. Word performs some operations for you which are not included in the recorded code. If you run the recorded macro, and the cursor is not in the appropriate header, the search will fail to find the text in the header.</P>
+<LI><P>Sometimes, Word will generate code that is just plain incorrect, even though the operations you request through the user interface will work correctly. My current favorite example may be easily reproduced.</P>
+<P>It is not uncommon for a template in the Office Startup directory to include AutoText. To reproduce an example of this problem, try the following:</P>
+<UL>
+<LI><P>Include an AutoText in a global template. Let's use UtilitiesAutoText as the AutoText name.</P>
+<LI><P>Use the File | New menu to create a new document based on the Normal template.</P>
+<LI><P>Turn on the macro recorder and insert the AutoText UtilitiesAutoText into the document. Stop the macro recorder. Do not yet look at the generated macro code.</P>
+<LI><P>Now run the generated macro. Obviously, this should again insert the same AutoText.
+Wrong! Instead, you get an error message indicating that the AutoText name does not exist. How can that be, after all, you just inserted the AutoText and recorded the macro code?</P>
+<P>OK, the suspense must be killing you, take a look at the macro code. You should see something like the following:</P>
+<PRE>
+    NormalTemplate.AutoTextEntries(&quot;UtilitiesAutoText&quot;).Insert Where:= _
+        Selection.Range
+</PRE>
+<P>Even though Word carried out the command you requested, the macro recorder generated incorrect code. The AutoText name is not in the Normal template so the code cannot work.</P>
+</UL>
+<LI><P>The macro recorder generates very poor code, for example:</P>
+<UL>
+<LI>Many extra statements may be generated.
+<LI>Redundant references to objects may be included.
+</UL>
+<P>Such code will execute much more slowly than most any reasonable manual coding.</P>
+<LI><P>Etc.</P>
+</OL>
+
+</BODY></HTML>

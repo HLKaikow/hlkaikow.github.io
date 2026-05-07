@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>How to rebuild a template</TITLE>
+		<script type="text/javascript" src="../GetURL.js"></script>
+<LINK REV="made" HREF="mailto:kaikow@standards.com" TITLE="How to rebuild a template">
+</HEAD>
+<BODY>
+<p>You are visitor number <img src="../counter.cnt%3FRebuildingTemplates" alt="?????"> since 14 October 2004.
+<br><a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+<hr><p>Copyright &copy; 1999 by Howard Kaikow. All rights reserved.
+<BR>Date: 14 February 1999
+<BR>From: Howard Kaikow &lt;kaikow@standards.com&gt;
+<BR>Subject: How to rebuild a template</p>
+<HR>
+<P>It is sometimes necessary to rebuild a template. The technique described below will work for all templates, but I'll demonstrate the technique for the MyStuff template.
+<P>For this, and other purposes, I recommend keeping around a CLEAN.dot template. You can create this as follows:</P>
+<UL>
+<LI>Exit from Word.
+<LI>Rename Normal.dot as, say, abNormal.dot.
+<LI>Restart Word.
+<LI>Exit from Word and say Yes when asked to save changes to the Normal template.
+<LI>Rename the new Normal.dot as Clean.dot, or some other name of your choosing.
+<LI>Rename abNormal.dot back to Normal.dot.
+</UL>
+<P>Clean.dot is the minimal Normal template created when you first install Word. It has only default settings, but can be very useful.
+<P>OK, let's do the deed.</P>
+<OL>
+<LI>Rename MyStuff.dot as, say, oldMyStuff.dot.
+<LI><P>Make a copy of Clean.dot, rename this MyStuff.dot.
+<LI><P>Start Word.
+<LI><P>Create a new document based on the MyStuff.dot template.
+<LI><P>Use the Organizer in the Macro dialog to copy the macros, styles, toolbars and auto text you wish to retain from oldMyStuff.dot to MyStuff.dot.
+<LI><P>Save the changes you have made to MyStuff.dot.
+<LI><P>If necessary, run any macros, or make changes manually, to restore any desired customizations to the menus and toolbars associated with MyStuff.dot.
+</OL>
+<P>In my opinion, all Word users should have macros, at least, for restoring settings to menus and toolbars, perhaps, for all templates. In many cases, these macros can be created by using Word's macro recorder, i.e., you may not need to know WordBasic or VBA to create such macros. 
+</BODY></HTML>

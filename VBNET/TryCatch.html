@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<script type="text/javascript" src="../GetURL.js"></script>
+<title>Try/Catch does not detect out of stack space error</title>
+<link rev="made" href="mailto:kaikow@standards.com" title=
+"Try/Catch does not detect out of stack space error">
+</head>
+<body>
+<p>You are visitor number <img src="../counter.cnt%3FTryCatch"
+alt="?????"> since February 2004.<br>
+<a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+
+<hr>
+<p>Copyright &copy; 2004 by Howard Kaikow. All rights
+reserved.<br>
+Date: 22 February 2004<br>
+From: Howard Kaikow &lt;kaikow@standards.com&gt;<br>
+Subject: Try/Catch does not detect out of stack space error</p>
+
+<hr>
+<p>On 14 February 2004, I posted the topic  &quot;Error handling doesn't work when I 
+ugrade to VB .NET 2003&quot; in the  microsoft.public.dotnet.languages.vb.upgrade newsgroup.</p>
+<p>As a result of that discussion, I have created a simplified example to 
+demonstrate the problem in both VB.NET 2002 and VB.NET 2003. </p>
+<p>I created the VB .NET 2003 project from a new project in VB .NET 2003.</p>
+<p>I created the VB .NET 2002 project from the VB .NET 2003 project using the 
+instructions in <a href="http://www.codeproject.com/KB/macros/vsconvert.aspx">
+http://www.codeproject.com/KB/macros/vsconvert.aspx</a>.</p>
+<p>I have identified several code blocks using comments. To understand the rest 
+of this document, you will need to download and view the code.</p>
+<p>Running the code with VB .NET 2003, I find the following:</p>
+<pre>    ' Neither the  Try/Catch in btnStart_Click, or in TestRecursion, will detect a stack overflow
+    ' error if ANY of the code blocks identified as L or Bn are uncommented, where "n" is a number
+    ' from 1 to the number of code blocks identified as failing that use Rnd or Random.
+
+    ' If code block L is not uncommented, then Try/Catch will detect a stack overflow error if any
+    ' of the code blocks identified as Gm are uncommented, where "m" is a number from 1 to the
+    ' number of code blocks identified as OK that use Random.
+</pre>
+<p>Running the code with VB .NET 2002, I get the same results with the following two differences:</p>
+<ol>
+<li>Using code block B3, in VB .NET 2002, Try/Catch does trap the stack overflow error. The error is not trapped by Try/Catch with VB .NET 2003.</li>
+<li>Using code block B1, in VB .NET 2003, Try/Catch fails to detect the stack overflow error. In VB .NET 2002, the behavior is worse, as no error is issued at runtime.</li>
+
+</ol>
+<h3>Downloads</h3>
+<p>
+<a href="TryCatchFailure2002.zip" onclick="this.href = GetURL('http://www.standards.com/VBNET/TryCatchFailure2002.zip')">Download VB .NET 2002 project</a>.
+</p>
+<p>
+<a href="TryCatchFailure2003.zip" onclick="this.href = GetURL('http://www.standards.com/VBNET/TryCatchFailure2003.zip')">Download VB .NET 2003 project</a>.
+</p>
+</body>
+</html>

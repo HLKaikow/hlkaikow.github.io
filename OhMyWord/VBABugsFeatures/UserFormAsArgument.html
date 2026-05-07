@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Passing Userform as an argument to a procedure (Excel and Word)</title>
+		<script type="text/javascript" src="../../GetURL.js"></script>
+</head>
+<body>
+<p>You are visitor number <img src="../../counter.cnt%3FUserformArg"
+alt="?????"> since 2 October 2004.<br>
+<a href="../../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+
+<hr>
+<p>Date: 2 October 2004
+<br>From: Howard Kaikow &lt;kaikow@standards.com&gt;
+<br>Subject: Passing Userform as an argument to a procedure (Excel and Word)</p>
+
+<hr>
+<p>In order to access the Caption of a Userform, I am passing the Userform as an 
+argument to a procedure.</p>
+
+<p>If I pass the Userform as an Object, then the code works as intended. If I 
+pass the Userform as an MSForms.Userform, the code does not work properly. I've 
+seen the same behavior in both Excel and Word (Office 97, 2000, and 2002, not yet tested in Office 2003).
+ <a href="../../Downloads/UserformArgument.zip" onclick="this.href = GetURL('http://www.standards.com/Downloads/UserformArgument.zip')">I have provided examples, 
+for both Word and Excel.</a> In each case, run the code beginning with the <b>StartHere</b> procedure.</p>
+
+<p>In one case, the caption is treated as an empty string.</p>
+
+<p>In the other case, the caption is displayed in the &quot;body&quot; of the Userform 
+rather than in the title bar.</p>
+</body>
+</html>

@@ -1,0 +1,871 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Windows (vers 22 March 2008), see www.w3.org">
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=us-ascii">
+
+  <title>Howard Kaikow's Sort Performance Comparison program -
+  Description</title>
+  <script type="text/javascript" src="../GetURL.js">
+</script>
+  <style type="text/css">
+div.center {text-align: center}
+  </style>
+</head>
+
+<body>
+  <p>You are visitor number <img alt="?????" src=
+  "../counter.cnt%3FSortPerformanceComparison-Description">
+   since 29 February 2004</p>
+
+  <p><a href="../indexmain.html" onclick=
+  "this.href = GetURL('http://www.standards.com/indexmain.html')">Go
+  to Howard Kaikow's home page</a></p>
+
+  <p>Copyright &copy; 2003-2007 by Howard Kaikow. All rights
+  reserved.</p>
+
+  <p>Date: 16 July 2007</p>
+
+  <p>Author: <a href="mailto:kaikow@standards.com">Howard
+  Kaikow</a> &lt;kaikow@standards.com&gt;</p>
+
+  <p>Subject: Sort Performance Comparison program - General
+  description</p>
+  <hr>
+
+  <h1>Purpose of the program</h1>
+
+  <p>The program is intended to facilitate the comparison of
+  several well-known sorting methods so one can choose among the
+  methods and, for Microsoft Office VBA programmers, choose an
+  alternative to Microsoft Word's WordBasic.SortArray, Microsoft
+  Word's document sort, and Microsoft Excel's worksheet sort.</p>
+
+  <p>Please note that by making this program available, I am not
+  indicating any intent to recommend algorithms or to discuss the
+  details of any algorithms.</p>
+
+  <h2><a href="SortPerformanceComparison-Description.html#Overview">Overview</a></h2>
+
+  <h2><a href="SortPerformanceComparison-Description.html#RunningTheProgram">Running the program</a></h2>
+
+  <blockquote>
+    <h3><a href="SortPerformanceComparison-Description.html#TerminatingTheProgram">Terminating the
+    program</a></h3>
+
+    <h3><a href="SortPerformanceComparison-Description.html#SelectingSortMethods">Selecting sort
+    methods</a></h3>
+
+    <h3><a href="SortPerformanceComparison-Description.html#NumberOfDataItems">Number of data items</a></h3>
+
+    <h3><a href="SortPerformanceComparison-Description.html#SortingAlgorithms">Sorting algorithms</a></h3>
+
+    <h3><a href="SortPerformanceComparison-Description.html#DataGeneration">Data generation</a></h3>
+
+    <h3><a href="SortPerformanceComparison-Description.html#DataTypes">Data types</a></h3>
+
+    <h3><a href="SortPerformanceComparison-Description.html#SourceOfTheUnsortedData">Source of the unsorted
+    data</a></h3>
+
+    <h3><a href="SortPerformanceComparison-Description.html#TargetForTheSortedData">Target for the sorted
+    data</a></h3>
+  </blockquote>
+
+  <h2><a href="SortPerformanceComparison-Description.html#ProgramOutputs">Program outputs</a></h2>
+  <hr>
+
+  <h1><a name="Overview" id="Overview">Overview</a></h1>
+
+  <p>I have often wondered why Microsoft did not include a VBA
+  method to sort an array, e.g. why was there not a Word VBA method
+  included to replace WordBasic's SortArray? In newsgroups and web
+  forums, many people have asked questions such as: "How do I sort
+  an array in VBA?". Often the response has been one of the
+  following:</p>
+
+  <blockquote>
+    <p>For Microsoft Word ("Word"):</p>
+
+    <blockquote>
+      <ul>
+        <li>
+          <p>Use the SortArray method of the WordBasic object.</p>
+        </li>
+
+        <li>
+          <p>Write, or obtain, a VB/VBA sorting procedure.</p>
+        </li>
+
+        <li>
+          <p>Obtain a DLL that includes a sorting procedure.</p>
+        </li>
+
+        <li>
+          <p>Copy the array into a Word document and use the Sort
+          method of Word's Range/Selection object, then copy the
+          sorted data into the array.</p>
+        </li>
+
+        <li>
+          <p>Start an instance of Microsoft Excel. Copy the array
+          into an Excel worksheet and use the Sort method of
+          Excel's Range object, then copy the sorted data into the
+          array.</p>
+        </li>
+      </ul>
+    </blockquote>
+
+    <p>For Microsoft Excel ("Excel"):</p>
+
+    <blockquote>
+      <ul>
+        <li>
+          <p>Copy the array into an Excel worksheet and use the
+          Sort method of Excel's Range object, then copy the sorted
+          data into the array.</p>
+        </li>
+
+        <li>
+          <p>Write, or obtain, a VB/VBA sorting procedure.</p>
+        </li>
+
+        <li>
+          <p>Obtain a DLL that includes a sorting procedure.</p>
+        </li>
+
+        <li>
+          <p>Start an instance of Word. Sort using the SortArray
+          method of the WordBasic object, then copy the sorted data
+          into the array.</p>
+        </li>
+
+        <li>
+          <p>Start an instance of Word. Copy the array into a Word
+          document and use the Sort method of Word's
+          Range/Selection object, then copy the sorted data into
+          the array.</p>
+        </li>
+      </ul>
+    </blockquote>
+  </blockquote>
+
+  <p>In the case of Word, it seemed obvious that using
+  WordBasic.SortArray would be best. After all, the
+  WordBasic.SortArray method is compiled into Word, and surely,
+  Microsoft must have used a reasonable sorting algorithm, so how
+  could one expect to write a sorting procedure in VB/VBA that
+  would outperform WordBasic.SortArray?</p>
+
+  <p>Up until a few years ago, I too believed that there was no
+  point in trying to do better than using WordBasic.SortArray, but
+  then I got curious and did some experimentation. I was shocked to
+  learn how badly WordBasic.SortArray performed. It is rather
+  trivial to outdo the performance of WordBasic.SortArray. Along
+  the way, I also did some experimentation with Excel.</p>
+
+  <p>I have developed a Microsoft Visual Basic 6 ("VB 6") program
+  to facilitate comparing the performance of various sorting
+  methods.</p>
+
+  <p><a href=
+  "SortPerformanceComparison-VersionHistory.html#VersionHistory"
+  onclick=
+  "this.href = GetURL('http://www.standards.com/Sorting/SortPerformanceComparison-VersionHistory.html#VersionHistory')">
+  Download the Sort Performance Comparison Program</a></p>
+
+  <p><a href=
+  "SortPerformanceComparison-Info.html"
+  onclick=
+  "this.href = GetURL('http://www.standards.com/Sorting/SortPerformanceComparison-Info.html')">
+  Click here to view more information for this program.</a></p>
+  <hr>
+
+  <h1><a name="RunningTheProgram" id="RunningTheProgram">Running
+  the program</a></h1>
+
+  <blockquote>
+    <p><b>Note: It is very important to read the documentation for
+    this program before running the program.</b></p>
+  </blockquote>
+
+  <p>There is no installation necessary, just directly run the
+  program. You should first read the remainder of this document
+  before running the program, especially, <a href=
+  "SortPerformanceComparison-Description.html#TerminatingTheProgram">Terminating the program</a> and <a href=
+  "SortPerformanceComparison-Description.html#SelectingSortMethods">Selecting sort methods</a>.</p>
+
+  <p>In order to run this program, you will need to have the
+  following installed:</p>
+
+  <ul>
+    <li>
+      <p>In order to use the following sort methods, it will be
+      necessary to have the needed Microsoft Excel or Microsoft
+      Word, or both, from <b>Microsoft Office 97, Microsoft Office
+      2000, Microsoft Office XP, or Microsoft Office 2003.</b></p>
+
+      <blockquote>
+        <ul>
+          <li>SortArray method of the WordBasic object in Word
+          VBA.</li>
+
+          <li>Sort method of the Range/Selection objects in Word
+          VBA.</li>
+
+          <li>Sort method of the Range object in Excel VBA.</li>
+        </ul>
+      </blockquote>
+
+      <p>The program attempts to detect errors caused by not having
+      the needed Microsoft Excel or Microsoft Word, but this is
+      unsupported use of this program. Version 1.2.1, or later, of
+      the program is needed to try to trap the errors properly.</p>
+    </li>
+
+    <li>
+      <p><strong>Windows 2000, or later</strong>.</p>
+    </li>
+
+    <li>
+      <p><b>Either Microsoft Visual Basic 6 or the Microsoft Visual
+      Basic 6 run-time files:</b> If you have neither, then you can
+      download the Visual Basic 6 run-time files by following the
+      instructions in <a href=
+      "http://support.microsoft.com/default.aspx?scid=kb;EN-US;192461">
+      VBRun60.exe Installs Visual Basic 6.0 Run-Time Files</a>.</p>
+
+      <p>As you must be running Microsoft Windows 2000, or later,
+      you should already have the Visual Basic 6 run-time files
+      installed.</p>
+    </li>
+  </ul>
+
+  <p>When you run the program, a Visual Basic 6 Form will be
+  displayed that looks something like the following.</p>
+
+  <div class="center">
+    <script type="text/javascript">
+            document.write('<p><img src="http://www.standards.com/Sorting/'&#32;+&#32;GetURL('http://www.standards.com/Sorting/SortPerformanceComparisonStartup.jpg')&#32;+&#32;'"><\/p>');
+    </script> <noscript>
+    <p><img alt="Sort Performance Comparison: Startup" src=
+    "SortPerformanceComparisonStartup.jpg"></p></noscript>
+  </div>
+
+  <p>The ListBox near the top of the Form lists the current action
+  being performed by the program and provides certain other
+  information.</p>
+
+  <p>The Form displays the following controls (not all the controls
+  are displayed for each data type):</p>
+
+  <blockquote>
+    <table id="AutoNumber1" style="BORDER-COLLAPSE: collapse"
+    summary="Sort Performance Comparison: Startup" border="1">
+      <tbody>
+        <tr>
+          <td>
+            <p style="TEXT-ALIGN: left">Select Sorting Algorithm
+            combo box</p>
+          </td>
+
+          <td>
+            <p>Choosing <b>Algorithm Comparison</b> from the combo
+            box presents a list of several <a href=
+            "SortPerformanceComparison-Description.html#SortingAlgorithms">sorting algorithms</a>. Choosing
+            any of the other options in the combo box presents a
+            list of one, or more, implementations of the selected
+            <a href="SortPerformanceComparison-Description.html#SortingAlgorithms">sorting algorithm</a>.</p>
+
+            <p>Note that the methods listed with <b>Algorithm
+            Comparison</b> are not necessarily the most efficient
+            for each algorithm.</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>List of sorting methods</p>
+          </td>
+
+          <td><a href="SortPerformanceComparison-Description.html#SelectingSortMethods">Use the check boxes
+          to select, one, or more, sorting methods</a> .</td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Number of data items</p>
+          </td>
+
+          <td>
+            <p>Enter the <a href="SortPerformanceComparison-Description.html#NumberOfDataItems">number of
+            data items</a>, the <b>sample size</b>, to be sorted.
+            The program will <a href="SortPerformanceComparison-Description.html#DataGeneration">generate the
+            data</a>.</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Order of source data</p>
+          </td>
+
+          <td>
+            <p>Choose how to <a href="SortPerformanceComparison-Description.html#DataGeneration">order the
+            data to be sorted</a>.</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Use Integer data</p>
+          </td>
+
+          <td>
+            <p>If checked, the program uses only integer data.</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Maximum integer value</td>
+
+          <td>Choose the <a href="SortPerformanceComparison-Description.html#MaximumIntegerValue">maximum
+          integer value</a> to be used when you have elected to use
+          integer data.</td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Choose data type</p>
+          </td>
+
+          <td>
+            <p>Choose the <a href="SortPerformanceComparison-Description.html#DataTypes">data type</a>.</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Case insensitive sort</td>
+
+          <td>If checked, the program will perform a case
+          insensitive sort for the String data type.</td>
+        </tr>
+
+        <tr>
+          <td>Use non-numeric strings</td>
+
+          <td>If not checked, strings will be numbers. If checked,
+          strings will be data randomly chosen from an internal
+          word list.</td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Display data</p>
+          </td>
+
+          <td>
+            <p>If checked, both the unsorted and sorted data will
+            be displayed in ListBoxes for the last selected sort
+            method that was run successfully.</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Reuse data</p>
+          </td>
+
+          <td>
+            <p>If checked, the data used for the previous set of
+            selected sort methods will be reused, but only if the
+            data type, the number of data items, whether
+            non-numeric, and the order of source data have not been
+            modified.</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Number of samples</p>
+          </td>
+
+          <td>
+            <p>The number of times the selected sort methods should
+            be run. If <b>Reuse data</b> is checked, the same data
+            will be used for each run.</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Select Source</p>
+          </td>
+
+          <td><a href="SortPerformanceComparison-Description.html#SourceOfTheUnsortedData">Select the source
+          of the unsorted data</a> .</td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Select Target</p>
+          </td>
+
+          <td><a href="SortPerformanceComparison-Description.html#TargetForTheSortedData">Select where to put
+          the sorted data</a>.</td>
+        </tr>
+
+        <tr>
+          <td>Set randomize seed</td>
+
+          <td>If checked, each time you load the program, the same
+          seed will be used to generate the same random number
+          sequence when you first select the Start button</td>
+        </tr>
+
+        <tr>
+          <td>Verify sort</td>
+
+          <td>If the target is an array, the <a href=
+          "SortPerformanceComparison-Description.html#VerificationOfSort">correctness of the sort will be
+          verified</a>.</td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Clear</p>
+          </td>
+
+          <td>
+            <p>Unselects all selected sort methods.</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Select All</p>
+          </td>
+
+          <td><a href="SortPerformanceComparison-Description.html#SelectingSortMethods">Selects all listed
+          sort methods</a>.</td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Exit</p>
+          </td>
+
+          <td><a href="SortPerformanceComparison-Description.html#TerminatingTheProgram">Terminate the
+          program</a>.</td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Start</p>
+          </td>
+
+          <td>
+            <p>Run using the selected options.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </blockquote>
+
+  <h2><a name="TerminatingTheProgram" id=
+  "TerminatingTheProgram">Terminating the program</a></h2>
+
+  <p>In order to allow for more accurate timing estimates, the
+  program cannot include code to facilitate your interrupting
+  program execution. The program needs to run to completion and
+  self-terminate. If you have a need to terminate the program, you
+  may do so by using the Windows Task Manager (CTRL + ALT + DEL) to
+  terminate the program.</p>
+
+  <p>If the program is allowed to run to completion, the program
+  should clean up after itself. If you interrupt program execution,
+  and you have selected any of the options that utilize Excel or
+  Word, you should also terminate the WinWord and Excel tasks
+  created by the program. The tasks will also vanish upon
+  rebooting.</p>
+
+  <h2><a name="SelectingSortMethods" id=
+  "SelectingSortMethods">Selecting sort methods</a></h2>
+
+  <p>Some of the sorting algorithms are very efficient, but a few,
+  such as Bubble Sort, are very inefficient.</p>
+
+  <p><a href=
+  "SortPerformanceComparison-Data.html"
+  onclick=
+  "this.href = GetURL('http://www.standards.com/Sorting/SortPerformanceComparison-Data.html')">
+  Click here to view some examples of performance.</a></p>
+
+  <h2><a name="NumberOfDataItems" id="NumberOfDataItems">Number of
+  data items</a></h2>
+
+  <p>The sample size that may be used is limited by:</p>
+
+  <ul>
+    <li>
+      <p>The amount of available memory on the system.</p>
+    </li>
+
+    <li>
+      <p>The amount of available paging file space.</p>
+    </li>
+
+    <li>
+      <p>The sample size may not be more than 32 768 with the
+      Visual Basic 6 ListBox Sort method. This restriction is due
+      to the ListCount property of a ListBox control. There are
+      ways to program around this restriction, but I have not yet
+      done so.</p>
+    </li>
+
+    <li>
+      <p>Restrictions imposed by Excel or Word:</p>
+
+      <ol>
+        <li>
+          <p>The sample size may not be more than 32 768 with the
+          SortArray method of the WordBasic object.</p>
+        </li>
+
+        <li>
+          <p>The sample size may not be more than 65 536 with the
+          Sort method of Excel's Range object.</p>
+        </li>
+
+        <li>
+          <p>Although I have not yet seen this documented, it
+          appears that the sample size may not be more than 16 382
+          with the Sort method of Word's Range/Selection
+          objects.</p>
+        </li>
+
+        <li>
+          <p>The Sort method of Word's Range/Selection objects does
+          not work with a sample size of 1</p>
+        </li>
+      </ol>
+    </li>
+
+    <li>
+      <p>Certain characteristics of particular sorting algorithms
+      may result in OUT OF STACK SPACE or OUT OF MEMORY errors.</p>
+    </li>
+
+    <li>
+      <p>The implementation details of the program. For example, in
+      a real application, one may choose to sort the data in place.
+      However, in order to re-use data with more than one sorting
+      method, the program needs to save the data and make a copy to
+      pass to the sorting code.</p>
+    </li>
+
+    <li>
+      <p>The size of the internal word list used by this
+      program.</p>
+    </li>
+
+    <li>
+      <p>Other programs that may be running.</p>
+    </li>
+  </ul>
+
+  <h2><a name="SortingAlgorithms" id="SortingAlgorithms">Sorting
+  algorithms</a></h2>
+
+  <p>The program includes implementations of the following sorting
+  algorithms:</p>
+
+  <blockquote>
+    <ul>
+      <li>Bubble sort</li>
+
+      <li>Counting sort</li>
+
+      <li>Heap sort</li>
+
+      <li>Insertion sort</li>
+
+      <li>Merge sort</li>
+
+      <li>Quicksort</li>
+
+      <li>Selection sort</li>
+
+      <li>Shell sort</li>
+    </ul>
+  </blockquote>
+
+  <p>The program provides a means to compare the performance of the
+  algorithms with each other, with various implementations of the
+  same algorithm, and with the following:</p>
+
+  <blockquote>
+    <ul>
+      <li>SortArray method of the WordBasic object in Word
+      VBA.</li>
+
+      <li>Sort method of the Range/Selection objects in Word
+      VBA.</li>
+
+      <li>Visual Basic 6 ListBox with the Sort property set to
+      True.</li>
+
+      <li>Sort method of the Range object in Excel VBA.</li>
+    </ul>
+  </blockquote>
+
+  <h2><a name="VerificationOfSort" id=
+  "VerificationOfSort">Verification of sort</a></h2>
+
+  <p>If the target of the sort is an array, the program will verify
+  whether the sort was done correctly.</p>
+
+  <p>The program will not attempt to verify the correctness of the
+  following as I have yet to see documentation of how those methods
+  sort:</p>
+
+  <blockquote>
+    <ul>
+      <li>SortArray method of the WordBasic object in Word
+      VBA.</li>
+
+      <li>Sort method of the Range/Selection objects in Word
+      VBA.</li>
+
+      <li>Visual Basic 6 ListBox with the Sort property set to
+      True.</li>
+
+      <li>Sort method of the Range object in Excel VBA.</li>
+    </ul>
+  </blockquote>
+
+  <h2><a name="DataGeneration" id="DataGeneration">Data
+  generation</a></h2>
+
+  <p>The program will generate the data used and allows you to
+  specify the order of the data that is to be sorted.</p>
+
+  <table id="AutoNumber2" style="BORDER-COLLAPSE: collapse"
+  summary="Sort Performance Comparison: Startup" border="1">
+    <tr>
+      <td>
+        <p>Random</p>
+      </td>
+
+      <td>
+        <p>The VB Rnd function is used to generate random data. The
+        data will be non-numeric strings if <b>Use non-numeric
+        strings</b> is checked. If <b>Use non-numeric strings</b>
+        is not checked, the data will be numbers. The data will be
+        all integers if <b>Use integer data</b> is checked.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p>Partially sorted data</p>
+      </td>
+
+      <td>
+        <p>The data will be consecutive integers starting with 0.
+        The number of integers will be equal to the sample size.
+        The first data item will be swapped with a randomly (using
+        the VB Rnd function) chosen data item.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p>Shuffle</p>
+      </td>
+
+      <td>
+        <p>The data will be consecutive integers starting with 0.
+        The number of integers will be equal to the sample size.
+        The data will be shuffled.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p>Forward</p>
+      </td>
+
+      <td>
+        <p>The data will be consecutive integers, in ascending
+        order, starting with 0. The number of integers will be
+        equal to the sample size.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p>Reverse</p>
+      </td>
+
+      <td>
+        <p>The data will be consecutive integers, in descending
+        order, starting with one less than the sample size. The
+        number of integers will be equal to the sample size.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p>Constant</p>
+      </td>
+
+      <td>
+        <p>The data will be a constant value.</p>
+      </td>
+    </tr>
+  </table>
+
+  <h2><a name="MaximumIntegerValue" id=
+  "MaximumIntegerValue">Maximum integer value</a></h2>
+
+  <p>You may choose the maximum integer value to be used when
+  <b>Use integer data</b> is checked.</p>
+
+  <h2><a name="DataTypes" id="DataTypes">Data types</a></h2>
+
+  <p>I have chosen to test the sorting of only the String, Double
+  and Long (32-bit signed integer) data types.</p>
+
+  <h2><a name="SourceOfTheUnsortedData" id=
+  "SourceOfTheUnsortedData">Source of the unsorted data</a></h2>
+
+  <p>The program assumes that the goal is to sort a vector
+  (one-dimensional array) of data and that the source for the data
+  may be any of the following:</p>
+
+  <ul>
+    <li>An array already in the program.</li>
+
+    <li>A column of data in a Word document.</li>
+
+    <li>A Visual Basic 6 ListBox.</li>
+
+    <li>A column of data in an Excel spreadsheet.</li>
+  </ul>
+
+  <p><a href=
+  "SortPerformanceComparison-Info.html#Timing"
+  onclick=
+  "this.href = GetURL('http://www.standards.com/Sorting/SortPerformanceComparison-Info.html#Timing')">
+  The program simulates retrieval of the data from the selected
+  data source by creating the data source and then retrieving the
+  data from the data source.</a></p>
+
+  <p>The simulated source should be deleted when the program
+  terminates normally.</p>
+
+  <h2><a name="TargetForTheSortedData" id=
+  "TargetForTheSortedData">Target for the sorted data</a></h2>
+
+  <p>The sorted data is not of much use unless the data can be
+  saved in the intended target. The target may be any of the
+  following:</p>
+
+  <ul>
+    <li>An array already in the program.</li>
+
+    <li>A column of data in a Word document.</li>
+
+    <li>A Visual Basic 6 ListBox.</li>
+
+    <li>A column of data in an Excel spreadsheet.</li>
+  </ul>
+
+  <p><a href=
+  "SortPerformanceComparison-Info.html#Timing"
+  onclick=
+  "this.href = GetURL('http://www.standards.com/Sorting/SortPerformanceComparison-Info.html#Timing')">
+  The program creates the data target and copies the sorted data to
+  the desired target.</a></p>
+
+  <p>The simulated target should be deleted when the program
+  terminates normally.</p>
+  <hr>
+
+  <h1><a name="ProgramOutputs" id="ProgramOutputs">Program
+  outputs</a></h1>
+
+  <p>If you choose to run one sample, the result may look something
+  like the following.</p>
+
+  <div class="center">
+    <script type="text/javascript">
+            document.write('<p><img src="http://www.standards.com/Sorting/'&#32;+&#32;GetURL('http://www.standards.com/Sorting/SortPerformanceComparisonNoDisplayNoSamples.jpg')&#32;+&#32;'"><\/p>');
+    </script> <noscript>
+    <p><img alt=
+    "Sort Performance Comparison: No Display, No Samples" src=
+    "SortPerformanceComparisonNoDisplayNoSamples.jpg"></p></noscript>
+  </div>
+
+  <p>You can already see how badly WordBasic.SortArray performs
+  compared with all other methods listed.</p>
+
+  <p>If you have elected to run more than one sample, the result
+  may look something like the following.</p>
+
+  <div class="center">
+    <script type="text/javascript">
+            document.write('<p><img src="http://www.standards.com/Sorting/'&#32;+&#32;GetURL('http://www.standards.com/Sorting/SortPerformanceComparisonNoDisplaySamples.jpg')&#32;+&#32;'"><\/p>');
+    </script> <noscript>
+    <p><img alt="Sort Performance Comparison: No Display, Samples"
+    src=
+    "SortPerformanceComparisonNoDisplaySamples.jpg"></p></noscript>
+  </div>
+
+  <p>When running more than one sample, the time (milliseconds)
+  reported is the arithmetic average (truncated to an integer). In
+  addition, the total time (truncated to an integer) and the number
+  of samples run for each sort method are reported.</p>
+
+  <p>If you choose to display the data, the result may look
+  something like the following.</p>
+
+  <div class="center">
+    <script type="text/javascript">
+            document.write('<p><img src="http://www.standards.com/Sorting/'&#32;+&#32;GetURL('http://www.standards.com/Sorting/SortPerformanceComparisonDisplay.jpg')&#32;+&#32;'"><\/p>');
+    </script> <noscript>
+    <p><img alt="Sort Performance Comparison: Display" src=
+    "SortPerformanceComparisonDisplay.jpg"></p></noscript>
+  </div>
+
+  <p>The sorted data displayed is from the last sorting method that
+  was run, in this case, quicksort. If the sorting algorithms are
+  correct, the result should have been the same no matter which
+  algorithms were used.</p>
+
+  <h1><a name="Log file">Log file</a></h1>
+
+  <p>The program will create, or append to, a log file named
+  SortPerformanceLog.txt. The file will be located in the same
+  directory in which you installed the program.</p>
+
+  <p>The primary purpose of the log file is to record the options
+  used and results for debugging the program.</p>
+
+  <p>If the <b>Verify sort</b> box is checked, upon a failure to
+  verify correctly, a file will be recorded in the same directory
+  as the log file. The file will have a name that reflects the date
+  and time the file was created, e.g.,
+  SortData-38006.635775463.txt. In combination with the log file,
+  the SortData file allows for debugging of, if any, sort
+  failures.</p>
+
+  <p>You may delete these files after running the program, unless
+  you need to report a problem, in which case, I will need both
+  files sent to me in a manner that I will specify as needed.</p>
+</body>
+</html>

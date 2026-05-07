@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Automatic Numbering in Microsoft Word Documents</title>
+		<script type="text/javascript" src="../GetURL.js"></script>
+</head>
+<body>
+<p>You are visitor number <img src=
+"../counter.cnt%3FAutomaticNumbering" alt="?????"> since 20 April 2001.
+<br><a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+
+<hr>
+<h1>Standards and other technical documents</h1>
+
+<p>This discussion will apply to most any document, however, my
+emphasis will be on the use of Microsoft Word for the creation and
+updating of technical documents such as standards and product
+specifications.</p>
+
+<p>The creation of such a document is usually an iterative process,
+involving modifying the document several times over a period of
+several months, even years, to produce the final specification.
+This can be a very tedious and ineffective process if one does not
+take advantage of the automatic numbering capabilities provided by
+Microsoft Word.</p>
+
+<p>There will likely be a need to revise the specification months,
+or years, later. Revision is expedited by using the automatic
+numbering capabilities provided by Microsoft Word</p>
+
+<p>My goal is to suggest some things and hope that editors of such
+documents use these suggestions to improve the situation.</p>
+
+<h1>Cross references</h1>
+
+<p>A document should never contain a hard coded cross reference,
+i.e., always use symbolic references using, say a REF field or an
+INCLUDETEXT Field.</p>
+
+<p class="MsoNormal" style="text-align:justify"><span lang=
+"EN-GB">I continue to see standards published using Microsoft Word
+documents that use only (or predominantly) hard coded cross
+references. This significantly increases the cost of correcting, or
+updating, the standard.</span></p>
+
+<p>Using macros can facilitate the conversion of hard coded
+references to symbolic references. I've done this for a few
+standards. Unfortunately, the process cannot be totally automated
+and verification is, at best, tedious</p>
+
+<h1>Heading 1-9 styles</h1>
+
+<h2>Applying to inappropriate paragraphs</h2>
+
+<p>Heading 1-9 styles must never be used for anything other than
+paragraphs intended to be numbered using Microsoft Word&rsquo;s
+automatic numbering of such paragraphs.</p>
+
+<p>If the styles are applied to other types of paragraphs, there is
+a problem if one needs to create an automatically generated table
+of contents using the TOC field.</p>
+
+<h2>Hard Coding Heading Numbering</h2>
+
+<p>If one wants to hard code numbering in paragraphs, do not do
+that using the Heading 1-9 styles. Such paragraphs can still be
+included in a table of contents by using the \t option in the TOC
+field.</p>
+
+<p>However, such hard coding, be it with Heading 1-9 styles or not,
+causes a significant difficulty in modifying a document. I&rsquo;ve
+seen published standards that have gaps in numbering, corresponding
+incorrect TOC entries and, if used in conjunction with hard coded
+references, well, &lsquo;nuff said.</p>
+
+<h1>Numbering of clauses in an Annex or Appendix</h1>
+
+<p>One of the great shortcomings of Microsoft Word has been the
+difficulty of using Heading Numbering in both the body and Annexes
+of a document. I find that this is one of the reasons some get led
+astray in using Heading 1-9 styles.</p>
+
+<p>I describe a clean solution in <a href=
+"../WordDownloads/NumberedAnnex.zip" onclick="this.href = GetURL('http://www.standards.com/WordDownloads/NumberedAnnex.zip')">Numbering of clauses using SEQ
+fields in an Annex (This is a zipped Word document).</a>.</p>
+</body>
+</html>
+

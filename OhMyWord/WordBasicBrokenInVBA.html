@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>WordBasic is broken in VBA</title>
+		<script type="text/javascript" src="../GetURL.js"></script>
+<link rev="made" href="mailto:kaikow@standards.com" title=
+"WordBasic is broken in VBA">
+</head>
+<body>
+<p>You are visitor number <img src="../counter.cnt%3FWordBasicBroken"
+alt="?????"> since 14 October 2004.
+<br><a href="../indexmain.html" onclick="this.href = GetURL('http://www.standards.com/indexmain.html')">Go to Howard Kaikow's home page</a></p>
+<p>Copyright &copy; 1999-2001 by Howard Kaikow. All rights reserved.
+<BR>Date: 12 March 2001
+<br>From: Howard Kaikow &lt;kaikow@standards.com&gt;
+<br>Subject: WordBasic is broken in VBA</p>
+<hr>
+<p>When you open a Word 6/7 template in Word 8, or later version,
+Word attempts to automatically convert the WordBasic macros to VBA
+macros.</p>
+
+<p>Much of this is done by using the WordBasic object to run the
+WordBasic commands. For example, if your WordBasic macro included
+an InsertPara statement, Word would convert this to
+WordBasic.InsertPara. Looks simple, don't be fooled.</p>
+
+<p>It would be reasonable to expect that any WordBasic command
+executed via the WordBasic object would use the same semantics as
+if the command had been executed in Word 6/7. Alas, that is not
+true.</p>
+
+<p>Here are some examples of conversion problems:</p>
+
+<ol>
+<li>
+<p>Many WordBasic macros clear the undo stack by toggling Mark
+Revisions (see Microsoft Knowledge Base article Q118987, or page
+249 of the 3rd edition of the Microsoft Press Word Developer's
+Kit). This just does not work in VBA. The automatic conversion
+results in:</p>
+
+<pre>
+Option Explicit
+Public Sub MAIN()
+Dim SaveMarkRevisions
+Dim dlg As Object: Set dlg = WordBasic.DialogRecord.ToolsRevisions(False)
+SaveMarkRevisions = dlg.MarkRevisions
+WordBasic.ToolsRevisions MarkRevisions:=Abs(SaveMarkRevisions - 1)
+WordBasic.ToolsRevisions MarkRevisions:=SaveMarkRevisions
+End Sub
+</pre>
+
+<p>Which gives one the false impression that the code was
+successfully converted. However, the deed does not get done at run
+time and our friend "insufficient memory" attacks us.</p>
+
+<p>I suspect that most programmers would convert the code to native
+VBA, using the suggestions in the Word Help topic Visual Basic
+Equivalents for WordBasic Commands. What is needed instead is to
+use an entirely different VBA statement,
+ActiveDocument.UndoClear.</p>
+
+<p>This is a critical piece of code to have its functionality
+changed via the WordBasic object</p>
+</li>
+
+<li>
+<p>The importing of WordBasic fails syntactically/semantically. For
+example:</p>
+
+<ul>
+<li>
+<p>
+<A href="CaseElseWB2VBA.html" onclick="this.href = GetURL('http://www.standards.com/OhMyWord/CaseElseWB2VBA.html')">I've seen 8 instances, so far, in which a Case Else statement
+was discarded. Wow, those were really hard to track down!</A></p> 
+</li>
+
+<li>
+<p>Even though I require explicit declaration of variables, and the
+required Option Explicit statements are included, I've seen VBA get
+quite creative.</p>
+
+<p>At least two conversions, resulted in the creation of a variable
+name that was nowhere used in the macros and, to make it worse, a
+DIM statement was not included for the variable. This resulted in a
+compile error when I tried to execute the code.</p>
+</li>
+</ul>
+</li>
+
+<li>
+<p>Certain statements executed via the WordBasic object do not use
+the same semantics as in Word 6/7.</p>
+
+<p>One case that caught me was TableMergeCells. WordBasic's
+TableMergeCells allows only horizontal merging, while VBA allows
+vertical merging as well. Alas, I found that if you have a
+WordBasic TableMergeCells statement that merges, say, 2 adjacent
+columns, the converted code collapses all cells into a single cell.
+This works in WordBasic, but not in VBA.</p>
+
+<p>There are more serious cases of such differences. Just beware
+that syntactic conversion does not mean semantic conversion.</p>
+
+</li>
+
+<li>
+<p>Certain statements, executed via the WordBasic object do not
+produce correct results. One example is
+WordBasic.Files$(PathName$). If PathName$ includes a space, the
+result is incorrect. This is described in Microsoft Knowledge Base
+article q167387.</p>
+</li>
+
+
+<li>
+<p>Certain statements, executed via the WordBasic object are
+no-ops, i.e., they do not do anything. One example is
+WordBasic.WaitCursor 1 (see Microsoft Knowledge Base article
+q177619).</p>
+</li>
+
+
+<li>
+<p>There are a number of undocumented tricks that are often used in
+WordBasic macros. Some of these do not work in VBA. One example is
+using an empty string to terminate a list used in a ListBoxArray.
+That no longer works.</p>
+</li>
+
+
+<li>
+<p>WordBasic was more forgiving in allowing us to omit optional
+parameters for certain commands. In some sense, these were bugs in
+our WordBasic macros, but people used them as undocumented
+features. VBA is not so forgiving.</p>
+</li>
+
+<li>
+<p>Etc.</p>
+</li>
+</ol>
+
+<p>For economic reasons, there is a need to be able to use
+many/most WordBasic macros, as automatically imported into VBA,
+without fully converting them to native VBA code. Problems such as
+those I listed prevent this from happening without also changing
+the original WordBasic code to achieve the same results in
+WordBasic and VBA.</p>
+
+<p>In many cases, WordBasic code will be converted entirely to VBA,
+and never look back. In so doing care must be taken to not be so
+automatic about converting the code. It will be necessary to use
+different techniques in the VBA code, in some cases, resulting in
+significant changes to the algorithms used by your macros.</p>
+</body>
+</html>
+

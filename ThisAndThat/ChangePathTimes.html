@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Windows (vers 22 March 2008), see www.w3.org">
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=us-ascii">
+
+  <title>Howard Kaikow's Change Path Times Program</title>
+  <script type="text/javascript" src="../GetURL.js">
+</script>
+  <style type="text/css">
+p.center {text-align: center}
+  p.left {text-align: left}
+  div.center {text-align: center}
+  </style>
+</head>
+
+<body>
+  <p>You are visitor number <img alt="?????" src=
+  "../counter.cnt%3FChangePathTimes"> since 19
+  August 2006</p>
+
+  <p><a href="../indexmain.html" onclick=
+  "this.href = GetURL('http://www.standards.com/indexmain.html')">Go
+  to Howard Kaikow's home page</a></p>
+
+  <p>Copyright &copy; 2006-2007 by Howard Kaikow. All rights
+  reserved.</p>
+
+  <p><strong>Date: 16 July 2007</strong></p>
+
+  <p>Author: <a href=
+  "mailto:kaikow@standards.com?subject=ChangePathTimes">Howard
+  Kaikow</a> &lt;kaikow@standards.com&gt;</p>
+
+  <p>Subject: Change Path Times Program</p>
+  <hr>
+
+  <blockquote>
+    <p class="center"><a href=
+    "ChangePathTimes-VersionHistory.html#VersionHistory"
+    onclick=
+    "this.href = GetURL('http://www.standards.com/ThisAndThat/ChangePathTimes-VersionHistory.html#VersionHistory')">
+    Download the latest version of the Change Path Times
+    Program</a></p>
+
+    <p class="center"><a href=
+    "ChangeFileTimes.html"
+    onclick=
+    "this.href = GetURL('http://www.standards.com/ThisAndThat/ChangeFileTimes.html')">
+    Also, see the Change File Times ("<b>File Times</b>")
+    program</a></p>
+  </blockquote>
+
+  <h2><a name="Overview" id="Overview">Overview</a></h2>
+
+  <p>There are circumstances in which "incorrect" file times are
+  recorded. These include:</p>
+
+  <ul>
+    <li>Copying a file, or directory, may not preserve the original
+    times for the copied files or directory.</li>
+
+    <li>Restoring files, or directories, from a backup might not
+    preserve the original times for the restored files or
+    directories.</li>
+
+    <li>Restoring files, or directories, from a backup might result
+    in UTC times being used instead of the original times.</li>
+  </ul>
+
+  <p>Subject to restrictions imposed by Microsoft's software, the
+  Change Path Times ("<strong>Path Times</strong>") program may be
+  used to restore the Access, Creation, and Modification times for
+  files in a path, and subdirectories of the path (or drive) to the
+  times in another path (or drive). The program should work with
+  files, directory files, file links, directory links and URL
+  links. In this document, statements about files also apply to
+  directory files and links.</p>
+
+  <h2>Requirements</h2>
+
+  <p>The program was compiled using Microsoft Visual Basic 6 (with
+  SP 6).</p>
+
+  <p>In order to run this program, you will need to have the
+  following installed:</p>
+
+  <ul>
+    <li>
+      <p><b>Windows 2000, or later.</b></p>
+    </li>
+
+    <li>
+      <p><b>Either Microsoft Visual Basic 6 or the Microsoft Visual
+      Basic 6 run-time files:</b> If you have neither, then you can
+      download the Visual Basic 6 run-time files by following the
+      instructions in <a href=
+      "http://support.microsoft.com/default.aspx?scid=kb;EN-US;192461">
+      VBRun60.exe Installs Visual Basic 6.0 Run-Time Files</a>.</p>
+    </li>
+  </ul>
+
+  <h2>Restrictions</h2>
+
+  <p>I have developed the program using Microsoft Windows 2000. The
+  program will not work on operating systems older than Microsoft
+  Windows 2000.</p>
+
+  <p>The Forms used by this program were designed using a screen
+  resolution of 1280 x 1024, hopefully, there will be no problems
+  at other screen resolutions.</p>
+
+  <h2>Output</h2>
+
+  <p>The program creates a log file named LogChangePathTimes.txt.
+  The file will be created in the directory in which
+  ChangePathTimes.exe is installed. If the file does not exist, the
+  file will be created by the program. If the file exists, the
+  program will append to the end of the file.</p>
+
+  <p>The log file is very important, and should be checked after
+  running the program. The log file lists the times that were
+  changed, and any errors encountered. If you inadvertently change
+  a file time, the information in the log file may be used to
+  restore the file times to a one second resolution.</p>
+
+  <h2>Running the program</h2>
+
+  <p>There is no installaton necessary. You may run the program by
+  double-clicking on the ChangePathTimes.exe file, or by using a
+  shortcut to that file.</p>
+
+  <p>When you run the program, a Form will be displayed that looks
+  something like the following.</p>
+
+  <div class="center">
+    <script type="text/javascript">
+        document.write('<p><img src="http://www.standards.com/ThisAndThat/'&#32;+&#32;GetURL('http://www.standards.com/ThisAndThat/ChangePathTimesStart.jpg')&#32;+&#32;'"><\/p>');
+    </script> <noscript>
+    <p><img alt="ChangePathTimes Start" src=
+    "ChangePathTimesStart.jpg"></p></noscript>
+  </div>
+
+  <p>You may terminate the program by clicking on the
+  <strong>Exit</strong> button.</p>
+
+  <p>Clicking on the <strong>Update Lists</strong> button will
+  cause the lists to be updated and reset. If logical drives are
+  added, or removed, <b>while</b> the program is running, you
+  <strong>must</strong> tell the program to update the drive
+  lists.</p>
+
+  <p>Clicking on the <strong>Modify Times</strong> button will
+  cause the program to attempt to copy times from files in one path
+  ("<strong>source path</strong>") to the corresponding files in
+  the other path ("<strong>destination path</strong>").</p>
+
+  <p>Selecting <strong>Log unchanged</strong> will cause the log
+  file to list the files, directories, or files and directories for
+  which times were not changed.</p>
+
+  <p>When you click on the <strong>Modify Times</strong> button, a
+  Form will be displayed that looks something like the
+  following.</p>
+
+  <div class="center">
+    <script type="text/javascript">
+        document.write('<p><img src="http://www.standards.com/ThisAndThat/'&#32;+&#32;GetURL('http://www.standards.com/ThisAndThat/ChangePathTimesFinished.jpg')&#32;+&#32;'"><\/p>');
+    </script> <noscript>
+    <p><img alt="ChangePathTimes Finished" src=
+    "ChangePathTimesFinished.jpg"></p></noscript>
+  </div>
+
+  <p class="left">If you have choosen to restore the times for
+  directories, the program will make a second pass on the
+  directories in an attempt to restore the <strong>Access
+  Times</strong>.</p>
+
+  <p class="left">Upon completion, you may select a pair of paths
+  and again click on the <strong>Modify Times</strong> button.</p>
+
+  <p class="center"></p>
+
+  <table id="Table1" style="BORDER-COLLAPSE: collapse" summary=
+  "Change File Times program" border="1">
+    <tr>
+      <td style="width=190: height=21">
+        <p class="center"><strong>Count</strong></p>
+      </td>
+
+      <td style="height=21">
+        <p class="center"><strong>Interpretation</strong></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21">
+      <strong>Processed</strong></td>
+
+      <td style="height=21">Number of files processed in the
+      <strong>destination path</strong>.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21">
+      <strong>Modified</strong></td>
+
+      <td style="height=21">
+        <p>Number of files in the <strong>destination path</strong>
+        that had all file times changed to those of the
+        corresponding file in the <strong>source path</strong>.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21">
+      <strong>Skipped</strong></td>
+
+      <td style="height=21">Number of files in the
+      <strong>destination path</strong> that could not be modified
+      because the file in the <strong>destination path</strong>
+      could not be accessed.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21"><strong>Could not
+      compare</strong></td>
+
+      <td style="height=21">Number of files in the
+      <strong>destination path</strong> that could not be modified
+      because the corresponding file in the <strong>source
+      path</strong> could not be accessed.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21"><strong>Could not
+      change</strong></td>
+
+      <td style="height=21">Number of files in the
+      <strong>destination path</strong> for which some times could
+      not be modified.</td>
+    </tr>
+
+    <tr>
+      <td style="width=190: height=21"><strong>Not
+      changed</strong></td>
+
+      <td style="height=21">Number of files in the
+      <strong>destination path</strong> that already had the same
+      times as the corresponding file in the <strong>source
+      path</strong>.</td>
+    </tr>
+  </table>
+
+  <h1>Issues</h1>
+
+  <ul>
+    <li>
+      <strong>Issue with virtual volumes mounted from Ghost
+      10:</strong>
+
+      <p><a href=
+      "../Software/GhostIssueFindFiles.html"
+      onclick=
+      "this.href = GetURL('http://www.standards.com/Software/GhostIssueFindFiles.html')">
+      Click here to see a description of a Ghost 10 issue that may
+      affect the <strong>Path Times</strong> program.</a></p>
+    </li>
+  </ul>
+</body>
+</html>
